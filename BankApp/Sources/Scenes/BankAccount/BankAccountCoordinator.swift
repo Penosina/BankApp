@@ -1,0 +1,72 @@
+//
+//  BankAccountCoordinator.swift
+//  BankApp
+//
+//  Created by Abrosimov Ilya on 02.03.2023.
+//
+
+import Foundation
+
+protocol BankAccountCoordinatorDelegate: AnyObject {
+	func bankAccountCoordinator(didRequestToCloseAccount bankAccount: BankAccount)
+}
+
+protocol BankAccountViewModelInput: AnyObject {
+	func update(with bankAccount: BankAccount)
+}
+
+struct BankAccountCoordinatorConfiguration {
+	let bankAccount: BankAccount
+}
+
+final class BankAccountCoordinator: ConfigurableCoordinator {
+	weak var delegate: BankAccountCoordinatorDelegate?
+
+	let navigationController: NavigationController
+	let appDependency: AppDependency
+
+	var childCoordinators: [Coordinator] = []
+	var onDidFinish: (() -> Void)?
+
+	private let configuration: BankAccountCoordinatorConfiguration
+	private weak var viewModel: BankAccountViewModelInput?
+
+	init(navigationController: NavigationController, appDependency: AppDependency, configuration: BankAccountCoordinatorConfiguration) {
+		self.navigationController = navigationController
+		self.appDependency = appDependency
+		self.configuration = configuration
+	}
+
+	func start(animated: Bool) {
+		showBankAccount(animated: animated)
+	}
+
+	private func showBankAccount(animated: Bool) {
+		let viewModel = BankAccountViewModel(dependencies: appDependency,
+											 bankAccount: configuration.bankAccount)
+		viewModel.delegate = self
+		let vc = BankAccountViewController(viewModel: viewModel)
+		self.viewModel = viewModel
+		addPopObserver(for: vc)
+		navigationController.pushViewController(vc, animated: animated)
+	}
+}
+
+extension BankAccountCoordinator: BankAccountViewModelDelegate {
+	func bankAccountViewModel(didRequest action: ActionType, with bankAccount: BankAccount) {
+		let configuration = CalculatorCoordinatorConfiguration(bankAccount: bankAccount,
+															   action: action)
+		let coordinator = show(CalculatorCoordinator.self, configuration, animated: true)
+		coordinator.delegate = self
+	}
+
+	func bankAccountViewModel(didRequestCloseAccount bankAccount: BankAccount) {
+		delegate?.bankAccountCoordinator(didRequestToCloseAccount: bankAccount)
+	}
+}
+
+extension BankAccountCoordinator: CalculatorCoordinatorDelegate {
+	func calculatorCoordinator(didUpdateBankAccount bankAccount: BankAccount) {
+		viewModel?.update(with: bankAccount)
+	}
+}
