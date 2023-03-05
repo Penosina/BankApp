@@ -24,7 +24,7 @@ final class BankAccountViewModel {
 	var onDidFinishRequest: (() -> Void)?
 
 	lazy var screenTitle: String = {
-		"Счёт №\(bankAccount.accountId)"
+		"Счёт №\(bankAccount.accountNumber)"
 	}()
 	var balance: String {
 		"\(bankAccount.balance) ₽"
@@ -60,16 +60,16 @@ final class BankAccountViewModel {
 	}
 
 	private func getProfile() {
-		onDidStartRequest?()
-		firstly {
-			dependencies.bankAccountsService.getAccount(with: bankAccount.accountId)
-		}.ensure {
-			self.onDidFinishRequest?()
-		}.done { bankAccount in
-			self.handle(bankAccount: bankAccount)
-		}.catch { error in
-			self.onDidReceiveError?(error)
-		}
+//		onDidStartRequest?()
+//		firstly {
+//			dependencies.bankAccountsService.getAccount(with: bankAccount.id)
+//		}.ensure {
+//			self.onDidFinishRequest?()
+//		}.done { bankAccount in
+//			self.handle(bankAccount: bankAccount)
+//		}.catch { error in
+//			self.onDidReceiveError?(error)
+//		}
 	}
 
 	private func handle(bankAccount: BankAccount) {
@@ -80,7 +80,7 @@ final class BankAccountViewModel {
 	private func closeAccount() {
 		onDidStartRequest?()
 		firstly {
-			self.dependencies.bankAccountsService.close(accountId: bankAccount.accountId)
+			self.dependencies.bankAccountsService.close(accountId: bankAccount.id)
 		}.ensure {
 			self.onDidFinishRequest?()
 		}.done { _ in

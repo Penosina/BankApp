@@ -19,7 +19,7 @@ final class BankAccountCellViewModel {
 	}
 
 	var accountName: String {
-		model.accountId
+		model.accountNumber
 	}
 
 	private let model: BankAccount

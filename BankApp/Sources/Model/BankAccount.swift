@@ -8,20 +8,23 @@
 import Foundation
 
 struct BankAccount {
-	let accountId: String
+	let id: String
+	let accountNumber: String
 	let balance: Double
 }
 
 extension BankAccount: Decodable {
 	private enum CodingKeys: String, CodingKey {
-		case accountId = "number"
+		case id
+		case accountNumber = "number"
 		case balance = "amount"
 	}
 
 	init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 
-		accountId = try container.decode(String.self, forKey: .accountId)
+		id = String(try container.decode(Int64.self, forKey: .id))
+		accountNumber = try container.decode(String.self, forKey: .accountNumber)
 		balance = try container.decode(Double.self, forKey: .balance)
 	}
 }

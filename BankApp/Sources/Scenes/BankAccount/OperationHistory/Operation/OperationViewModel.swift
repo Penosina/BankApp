@@ -36,10 +36,11 @@ final class OperationViewModel {
 	}
 
 	var date: String {
-		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "dd MMM yyyy, HH:mm"
-		dateFormatter.timeZone = .current
-		return dateFormatter.string(from: operation.executeDate)
+//		let dateFormatter = DateFormatter()
+//		dateFormatter.dateFormat = "dd MMM yyyy, HH:mm"
+//		dateFormatter.timeZone = .current
+//		return dateFormatter.string(from: operation.executeDate)
+		operation.executeDate
 	}
 
 	private let operation: Operation

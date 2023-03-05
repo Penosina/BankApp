@@ -51,10 +51,10 @@ final class NetworkService: NetworkServiceProtocol {
 				return
 			}
 
-			if case .failure(let error) = response.result {
-				seal.reject(error.underlyingError ?? error)
-				return
-			}
+//			if case .failure(let error) = response.result {
+//				seal.reject(error.underlyingError ?? error)
+//				return
+//			}
 
 			let statusCode = HTTPStatusCode(rawValue: response.response?.statusCode ?? 500)
 

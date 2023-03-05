@@ -54,7 +54,7 @@ final class CalculatorViewModel {
 			return
 		}
 
-		let query = TransferQuery(accountId: bankAccount.accountId, amount: amount)
+		let query = TransferQuery(accountId: bankAccount.id, amount: amount)
 		let promise: Promise<BankAccount>
 		switch action {
 		case .withdraw:

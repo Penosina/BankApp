@@ -19,7 +19,7 @@ protocol BankAccountsNetworkProtocol {
 	func withdraw(query: TransferQuery) -> Promise<BankAccount>
 	func replenish(query: TransferQuery) -> Promise<BankAccount>
 	func create() -> Promise<BankAccount>
-	func close(accountId: String) -> Promise<BankAccount>
+	func close(accountId: String) -> Promise<EmptyResponse>
 	func getOperaionHistory(accountId: String) -> Promise<[Operation]>
 }
 

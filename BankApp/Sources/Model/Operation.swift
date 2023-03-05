@@ -9,7 +9,7 @@ import Foundation
 
 struct Operation: Decodable {
 	let value: String
-	let executeDate: Date
+	let executeDate: String
 	let type: OperationType
 }
 

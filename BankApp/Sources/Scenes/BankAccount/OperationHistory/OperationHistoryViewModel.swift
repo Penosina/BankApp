@@ -33,25 +33,25 @@ final class OperationHistoryViewModel {
 	}
 
 	private func loadOperationHistory() {
-		let operations = [
-			Operation(value: "Case 1", executeDate: Date(), type: .in),
-			Operation(value: "Case 2", executeDate: Date(), type: .out),
-			Operation(value: "Case 3", executeDate: Date(), type: .in),
-			Operation(value: "Case 4", executeDate: Date(), type: .out),
-			Operation(value: "Case 5", executeDate: Date(), type: .in),
-		]
-		handle(operations: operations)
+//		let operations = [
+//			Operation(value: "Case 1", executeDate: Date(), type: .in),
+//			Operation(value: "Case 2", executeDate: Date(), type: .out),
+//			Operation(value: "Case 3", executeDate: Date(), type: .in),
+//			Operation(value: "Case 4", executeDate: Date(), type: .out),
+//			Operation(value: "Case 5", executeDate: Date(), type: .in),
+//		]
+//		handle(operations: operations)
 
-//		onDidStartRequest?()
-//		firstly {
-//			dependencies.bankAccountsService.getOperaionHistory(accountId: bankAccount.accountId)
-//		}.ensure {
-//			self.onDidFinishRequest?()
-//		}.done { operations in
-//			self.handle(operations: operations)
-//		}.catch { error in
-//			self.onDidReceiveError?(error)
-//		}
+		onDidStartRequest?()
+		firstly {
+			dependencies.bankAccountsService.getOperaionHistory(accountId: bankAccount.id)
+		}.ensure {
+			self.onDidFinishRequest?()
+		}.done { operations in
+			self.handle(operations: operations)
+		}.catch { error in
+			self.onDidReceiveError?(error)
+		}
 	}
 
 	private func handle(operations: [Operation]) {

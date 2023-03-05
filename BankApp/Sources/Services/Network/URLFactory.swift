@@ -8,37 +8,34 @@
 import Foundation
 
 struct URLFactory {
-	private static let baseURL = "http://185.219.82.59:8765/core/"
+//	private static let baseURL = "http://185.219.82.59:8765/core/"
+	private static let baseURL = "http://localhost:8765/client/"
+	private static let authBaseURL = "http://localhost:8765/user/"
+	private static let clientId = "952"
 
 	struct Auth {
-		static let auth = baseURL + "auth"
+		static let auth = authBaseURL + "auth"
 	}
 
 	struct OperationHistory {
-		static let history = baseURL + "history"
+		static let history = baseURL + "history/operations"
 	}
 
 	struct BankAccounts {
-		static let accounts = baseURL + "accounts"
+		static let accounts = baseURL + "account/" + clientId
+		static let withdraw = baseURL + "account/withdrawal"
+		static let replenish = baseURL + "account/refill"
 
 		static func account(id: String) -> String {
 			baseURL + "accounts/\(id)"
 		}
 
-		static func withdraw(id: String) -> String {
-			baseURL + "accounts/\(id)/" + "withdraw"
-		}
-
-		static func replenish(id: String) -> String {
-			baseURL + "accounts/\(id)/" + "replenish"
-		}
-
 		static func close(id: String) -> String {
-			baseURL + "accounts/\(id)/" + "close"
+			baseURL + "account/" + id
 		}
 
 		static func operationHistory(id: String) -> String {
-			baseURL + "accounts/\(id)/" + "history"
+			baseURL + "history/operations/" + id
 		}
 	}
 

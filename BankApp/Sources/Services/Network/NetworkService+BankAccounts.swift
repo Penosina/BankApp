@@ -14,6 +14,7 @@ struct TransferQuery {
 
 extension NetworkService: BankAccountsNetworkProtocol {
 	private enum Keys {
+		static let accountId = "accountId"
 		static let amount = "amount"
 	}
 
@@ -30,21 +31,23 @@ extension NetworkService: BankAccountsNetworkProtocol {
 	}
 
 	func withdraw(query: TransferQuery) -> Promise<BankAccount> {
-		let parameters = [
+		let parameters: [String: Any] = [
+			Keys.accountId: query.accountId,
 			Keys.amount: query.amount
 		]
 		return request(method: .post,
-					   url: URLFactory.BankAccounts.withdraw(id: query.accountId),
+					   url: URLFactory.BankAccounts.withdraw,
 					   authorized: false,
 					   parameters: parameters)
 	}
 
 	func replenish(query: TransferQuery) -> Promise<BankAccount> {
-		let parameters = [
+		let parameters: [String: Any] = [
+			Keys.accountId: query.accountId,
 			Keys.amount: query.amount
 		]
 		return request(method: .post,
-					   url: URLFactory.BankAccounts.replenish(id: query.accountId),
+					   url: URLFactory.BankAccounts.replenish,
 					   authorized: false,
 					   parameters: parameters)
 	}
@@ -55,8 +58,8 @@ extension NetworkService: BankAccountsNetworkProtocol {
 				authorized: false)
 	}
 
-	func close(accountId: String) -> Promise<BankAccount> {
-		request(method: .post,
+	func close(accountId: String) -> Promise<EmptyResponse> {
+		request(method: .delete,
 				url: URLFactory.BankAccounts.close(id: accountId),
 				authorized: false)
 	}
