@@ -16,6 +16,9 @@
 		CE5B4FE529B4F901004684EF /* LoanCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B4FE429B4F901004684EF /* LoanCellView.swift */; };
 		CE5B4FE729B4F908004684EF /* LoanCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B4FE629B4F908004684EF /* LoanCellViewModel.swift */; };
 		CE5B4FE929B50911004684EF /* AlertShowing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B4FE829B50911004684EF /* AlertShowing.swift */; };
+		CE5B4FEC29B51B08004684EF /* LoanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B4FEB29B51B08004684EF /* LoanViewController.swift */; };
+		CE5B4FEE29B51B21004684EF /* LoanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B4FED29B51B21004684EF /* LoanViewModel.swift */; };
+		CE5B4FF029B51B56004684EF /* LoanCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B4FEF29B51B56004684EF /* LoanCoordinator.swift */; };
 		CE6803A129B1FA0F00E917D9 /* BankAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6803A029B1FA0F00E917D9 /* BankAccount.swift */; };
 		CE6803A329B1FB8300E917D9 /* URLFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6803A229B1FB8300E917D9 /* URLFactory.swift */; };
 		CE6803A529B1FE3C00E917D9 /* NetworkService+BankAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6803A429B1FE3C00E917D9 /* NetworkService+BankAccounts.swift */; };
@@ -105,6 +108,9 @@
 		CE5B4FE429B4F901004684EF /* LoanCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanCellView.swift; sourceTree = "<group>"; };
 		CE5B4FE629B4F908004684EF /* LoanCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanCellViewModel.swift; sourceTree = "<group>"; };
 		CE5B4FE829B50911004684EF /* AlertShowing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertShowing.swift; sourceTree = "<group>"; };
+		CE5B4FEB29B51B08004684EF /* LoanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanViewController.swift; sourceTree = "<group>"; };
+		CE5B4FED29B51B21004684EF /* LoanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanViewModel.swift; sourceTree = "<group>"; };
+		CE5B4FEF29B51B56004684EF /* LoanCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanCoordinator.swift; sourceTree = "<group>"; };
 		CE6803A029B1FA0F00E917D9 /* BankAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccount.swift; sourceTree = "<group>"; };
 		CE6803A229B1FB8300E917D9 /* URLFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLFactory.swift; sourceTree = "<group>"; };
 		CE6803A429B1FE3C00E917D9 /* NetworkService+BankAccounts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkService+BankAccounts.swift"; sourceTree = "<group>"; };
@@ -222,6 +228,16 @@
 				CE5B4FE629B4F908004684EF /* LoanCellViewModel.swift */,
 			);
 			path = LoanCell;
+			sourceTree = "<group>";
+		};
+		CE5B4FEA29B51AFA004684EF /* Loan */ = {
+			isa = PBXGroup;
+			children = (
+				CE5B4FEB29B51B08004684EF /* LoanViewController.swift */,
+				CE5B4FED29B51B21004684EF /* LoanViewModel.swift */,
+				CE5B4FEF29B51B56004684EF /* LoanCoordinator.swift */,
+			);
+			path = Loan;
 			sourceTree = "<group>";
 		};
 		CE6803BA29B3BE3C00E917D9 /* Calculator */ = {
@@ -368,6 +384,7 @@
 		CEE25F2E29ABE93200810CD2 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				CE5B4FEA29B51AFA004684EF /* Loan */,
 				CE6803C329B4B7B300E917D9 /* LoanList */,
 				CEE25F3029ABE97500810CD2 /* MainCoordinator.swift */,
 				CE6803BA29B3BE3C00E917D9 /* Calculator */,
@@ -700,14 +717,17 @@
 				CEE25F7D29AE2B8300810CD2 /* FullOperationHistoryViewController.swift in Sources */,
 				CEE25F5D29ADEAF100810CD2 /* OAuthAuthenticator.swift in Sources */,
 				CEE25F9129AFCA8800810CD2 /* BankAccountListViewController.swift in Sources */,
+				CE5B4FEC29B51B08004684EF /* LoanViewController.swift in Sources */,
 				CEE25F5229AD320500810CD2 /* NetworkServiceProtocol.swift in Sources */,
 				CE6803B929B3BE2600E917D9 /* CalculatorViewController.swift in Sources */,
+				CE5B4FEE29B51B21004684EF /* LoanViewModel.swift in Sources */,
 				CE6803BE29B3C87800E917D9 /* ActionType.swift in Sources */,
 				CEE25F2629ABE4FA00810CD2 /* ActivityIndicatorViewDisplaying.swift in Sources */,
 				CE6803CB29B4DDF400E917D9 /* OperationView.swift in Sources */,
 				CEE25F6929ADF05A00810CD2 /* OAuthService.swift in Sources */,
 				CEE25F6429ADEF1D00810CD2 /* NetworkProtocols.swift in Sources */,
 				CE6803C629B4DCFB00E917D9 /* OperationHistoryView.swift in Sources */,
+				CE5B4FF029B51B56004684EF /* LoanCoordinator.swift in Sources */,
 				CEE25F8A29AFAF6A00810CD2 /* ProfileView.swift in Sources */,
 				CE6803BC29B3BE4C00E917D9 /* CalculatorViewModel.swift in Sources */,
 				CEE25F8C29AFAFA000810CD2 /* ProfileViewModel.swift in Sources */,
