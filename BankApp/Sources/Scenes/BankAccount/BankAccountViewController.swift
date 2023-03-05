@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BankAccountViewController: UIViewController {
+final class BankAccountViewController: UIViewController, AlertShowing {
 	private let scrollView = UIScrollView()
 	private let contentStackView: UIStackView = {
 		let stackView = UIStackView()
@@ -49,7 +49,9 @@ final class BankAccountViewController: UIViewController {
 
 	@objc
 	private func closeAccount() {
-		viewModel.didRequestCloseAccount()
+		let action = viewModel.didRequestCloseAccount
+		showAlert(title: "Вы уверены, что хотите закрыть счет?",
+				  action: action)
 	}
 
 	init(viewModel: BankAccountViewModel) {

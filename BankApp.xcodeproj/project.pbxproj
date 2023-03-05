@@ -15,6 +15,7 @@
 		CE5B4FE229B4F55D004684EF /* LoanListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B4FE129B4F55D004684EF /* LoanListViewModel.swift */; };
 		CE5B4FE529B4F901004684EF /* LoanCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B4FE429B4F901004684EF /* LoanCellView.swift */; };
 		CE5B4FE729B4F908004684EF /* LoanCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B4FE629B4F908004684EF /* LoanCellViewModel.swift */; };
+		CE5B4FE929B50911004684EF /* AlertShowing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B4FE829B50911004684EF /* AlertShowing.swift */; };
 		CE6803A129B1FA0F00E917D9 /* BankAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6803A029B1FA0F00E917D9 /* BankAccount.swift */; };
 		CE6803A329B1FB8300E917D9 /* URLFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6803A229B1FB8300E917D9 /* URLFactory.swift */; };
 		CE6803A529B1FE3C00E917D9 /* NetworkService+BankAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6803A429B1FE3C00E917D9 /* NetworkService+BankAccounts.swift */; };
@@ -103,6 +104,7 @@
 		CE5B4FE129B4F55D004684EF /* LoanListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanListViewModel.swift; sourceTree = "<group>"; };
 		CE5B4FE429B4F901004684EF /* LoanCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanCellView.swift; sourceTree = "<group>"; };
 		CE5B4FE629B4F908004684EF /* LoanCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanCellViewModel.swift; sourceTree = "<group>"; };
+		CE5B4FE829B50911004684EF /* AlertShowing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertShowing.swift; sourceTree = "<group>"; };
 		CE6803A029B1FA0F00E917D9 /* BankAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccount.swift; sourceTree = "<group>"; };
 		CE6803A229B1FB8300E917D9 /* URLFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLFactory.swift; sourceTree = "<group>"; };
 		CE6803A429B1FE3C00E917D9 /* NetworkService+BankAccounts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkService+BankAccounts.swift"; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 			children = (
 				CEE25F2329ABE4D900810CD2 /* NavigationBarHiding.swift */,
 				CEE25F2529ABE4FA00810CD2 /* ActivityIndicatorViewDisplaying.swift */,
+				CE5B4FE829B50911004684EF /* AlertShowing.swift */,
 				CEE25F2729ABE54C00810CD2 /* ReuseIdentifiable.swift */,
 			);
 			path = Protocols;
@@ -714,6 +717,7 @@
 				CEE25F6229ADEF0600810CD2 /* NetworkService+Auth.swift in Sources */,
 				CEE25EFD29ABD93800810CD2 /* SceneDelegate.swift in Sources */,
 				CEE25F7929AE2AF900810CD2 /* FeedCoordinator.swift in Sources */,
+				CE5B4FE929B50911004684EF /* AlertShowing.swift in Sources */,
 				CEE25F4B29AD20B500810CD2 /* UIFont+AppFonts.swift .swift in Sources */,
 				CE6803CD29B4DDFB00E917D9 /* OperationViewModel.swift in Sources */,
 				CE6803A129B1FA0F00E917D9 /* BankAccount.swift in Sources */,
