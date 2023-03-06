@@ -7,15 +7,15 @@
 
 import UIKit
 
-final class TakeLoanViewController: UIViewController, NavigationBarHiding, ActivityIndicatorViewDisplaying {
+final class TakeLoanViewController: UIViewController, ActivityIndicatorViewDisplaying {
 	let activityIndicatorView = ActivityIndicatorView()
 
 	private let scrollView = UIScrollView()
 	private let contentStackView = UIStackView()
 	private let amountTextField = TextField()
 	private let periodTextField = TextField()
-	private let selectReplenishAccountButton = GrayRoundedButton()
 	private let selectWithdrawalAccountButton = GrayRoundedButton()
+	private let selectReplenishAccountButton = GrayRoundedButton()
 	private let submitButton = CommonButton()
 
 	private let viewModel: TakeLoanViewModel
@@ -55,8 +55,8 @@ final class TakeLoanViewController: UIViewController, NavigationBarHiding, Activ
 		setupContentStackView()
 		setupAmountTextField()
 		setupPeriodTextField()
-		setupReplenishAccountButton()
 		setupWithdrawalAccountButton()
+		setupReplenishAccountButton()
 		setupSubmitButton()
 		setupActivityIndicatorView()
 	}
@@ -99,22 +99,22 @@ final class TakeLoanViewController: UIViewController, NavigationBarHiding, Activ
 		periodTextField.keyboardType = .decimalPad
 	}
 
-	private func setupReplenishAccountButton() {
-		contentStackView.addArrangedSubview(selectReplenishAccountButton)
-		selectReplenishAccountButton.systemImageAsset = .banknote
-		selectReplenishAccountButton.setTitle("Выберите аккаунт для списания", for: .normal)
-		selectReplenishAccountButton.addTarget(self,
-											   action: #selector(selectReplenishAccount),
-											   for: .touchUpInside)
-	}
-
 	private func setupWithdrawalAccountButton() {
 		contentStackView.addArrangedSubview(selectWithdrawalAccountButton)
 		selectWithdrawalAccountButton.systemImageAsset = .banknote
-		selectWithdrawalAccountButton.setTitle("Выберите аккаунт для зачисления", for: .normal)
+		selectWithdrawalAccountButton.setTitle("Выберите аккаунт для списания", for: .normal)
 		selectWithdrawalAccountButton.addTarget(self,
 												action: #selector(selectWithdrawalAccount),
 												for: .touchUpInside)
+	}
+	
+	private func setupReplenishAccountButton() {
+		contentStackView.addArrangedSubview(selectReplenishAccountButton)
+		selectReplenishAccountButton.systemImageAsset = .banknote
+		selectReplenishAccountButton.setTitle("Выберите аккаунт для зачисления", for: .normal)
+		selectReplenishAccountButton.addTarget(self,
+											   action: #selector(selectReplenishAccount),
+											   for: .touchUpInside)
 	}
 
 	private func setupSubmitButton() {

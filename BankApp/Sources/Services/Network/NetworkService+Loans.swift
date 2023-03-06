@@ -14,16 +14,18 @@ extension NetworkService: LoansNetworkProtocol {
 		static let loanAmount = "loanAmount"
 		static let accountDebitingId = "accountDebitingId"
 		static let accountReplenishmentId = "accountReplenishmentId"
-		static let loanId = "loanId"
+		static let loanId = "id"
 		static let amount = "amount"
 		static let accountId = "accountId"
+		static let rateId = "rateId"
+		static let clientId = "clientId"
 	}
 
 	func getLoans() -> Promise<[Loan]> {
 		request(method: .get, url: URLFactory.Loans.loans, authorized: false)
 	}
 
-	func repay(query: RepayLoanQuery) -> Promise<Loan> {
+	func repay(query: RepayLoanQuery) -> Promise<RepaymentModel> {
 		let parameters: Parameters = [
 			Keys.loanId: query.loanId,
 			Keys.amount: query.amount,
@@ -40,10 +42,12 @@ extension NetworkService: LoansNetworkProtocol {
 			Keys.loanPeriod: query.loanPeriod,
 			Keys.loanAmount: query.loanAmount,
 			Keys.accountDebitingId: query.accountDebitingId,
-			Keys.accountReplenishmentId: query.accountReplenishmentId
+			Keys.accountReplenishmentId: query.accountReplenishmentId,
+			Keys.rateId: 1001,
+			Keys.clientId: 1103
 		]
 		return request(method: .post,
-					   url: URLFactory.Loans.loans,
+					   url: URLFactory.Loans.create,
 					   authorized: false,
 					   parameters: parameters)
 	}
@@ -52,8 +56,8 @@ extension NetworkService: LoansNetworkProtocol {
 struct CreateLoanQuery {
 	let loanPeriod: Int
 	let loanAmount: Double
-	let accountDebitingId: String
-	let accountReplenishmentId: String
+	let accountDebitingId: Int64
+	let accountReplenishmentId: Int64
 }
 
 struct RepayLoanQuery {

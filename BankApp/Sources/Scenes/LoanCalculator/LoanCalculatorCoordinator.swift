@@ -13,6 +13,7 @@ struct LoanCalculatorCoordinatorConfiguration {
 
 protocol LoanCalculatorCoordinatorDelegate: AnyObject {
 	func loanCalculatorCoordinator(didRequestToUpdateLoan loan: Loan)
+	func loanCalculatorCoordinatorDidRequestToCloseLoanScreen()
 }
 
 final class LoanCalculatorCoordinator: ConfigurableCoordinator {
@@ -51,6 +52,11 @@ final class LoanCalculatorCoordinator: ConfigurableCoordinator {
 extension LoanCalculatorCoordinator: LoanCalculatorViewModelDelegate {
 	func loanCalculatorViewModel(didRequestToUpdateLoan loan: Loan) {
 		delegate?.loanCalculatorCoordinator(didRequestToUpdateLoan: loan)
+		navigationController.dismiss(animated: true)
+	}
+	
+	func loanCalculatorViewModelDidRequestToCloseLoanScreen() {
+		delegate?.loanCalculatorCoordinatorDidRequestToCloseLoanScreen()
 		navigationController.dismiss(animated: true)
 	}
 }

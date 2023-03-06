@@ -13,6 +13,7 @@ struct LoanCoordinatorConfiguration {
 
 protocol LoanViewModelInput: AnyObject {
 	func update(loan: Loan)
+	func didEnd()
 }
 
 final class LoanCoordinator: ConfigurableCoordinator {
@@ -55,10 +56,18 @@ extension LoanCoordinator: LoanViewModelDelegate {
 		let coordinator = show(LoanCalculatorCoordinator.self, configuration, animated: true)
 		coordinator.delegate = self
 	}
+	
+	func loanViewModelDidRequestToCloseScreen() {
+		navigationController.popViewController(animated: true)
+	}
 }
 
 extension LoanCoordinator: LoanCalculatorCoordinatorDelegate {
 	func loanCalculatorCoordinator(didRequestToUpdateLoan loan: Loan) {
 		viewModel?.update(loan: loan)
+	}
+	
+	func loanCalculatorCoordinatorDidRequestToCloseLoanScreen() {
+		viewModel?.didEnd()
 	}
 }

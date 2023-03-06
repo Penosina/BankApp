@@ -11,14 +11,15 @@ struct URLFactory {
 //	private static let baseURL = "http://185.219.82.59:8765/core/"
 	private static let baseURL = "http://localhost:8765/client/"
 	private static let authBaseURL = "http://localhost:8765/user/"
-	private static let clientId = "952"
+	private static let clientId = "1103"
 
 	struct Auth {
 		static let auth = authBaseURL + "auth"
 	}
 
 	struct BankAccounts {
-		static let accounts = baseURL + "account/" + clientId
+		static let accounts = baseURL + "account/" + clientId + "/client"
+		static let create = baseURL + "account/" + clientId
 		static let withdraw = baseURL + "account/withdrawal"
 		static let replenish = baseURL + "account/refill"
 
@@ -36,7 +37,8 @@ struct URLFactory {
 	}
 
 	struct Loans {
-		static let loans = baseURL + "loan/" + clientId
-		static let repay = baseURL + "loan/repay/" + clientId
+		static let create = baseURL + "loan"
+		static let loans = baseURL + "loan/" + clientId + "/client"
+		static let repay = baseURL + "loan/repay"
 	}
 }

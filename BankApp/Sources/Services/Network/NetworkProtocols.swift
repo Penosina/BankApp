@@ -25,6 +25,6 @@ protocol BankAccountsNetworkProtocol {
 
 protocol LoansNetworkProtocol {
 	func getLoans() -> Promise<[Loan]>
-	func repay(query: RepayLoanQuery) -> Promise<Loan>
+	func repay(query: RepayLoanQuery) -> Promise<RepaymentModel>
 	func create(query: CreateLoanQuery) -> Promise<Loan>
 }

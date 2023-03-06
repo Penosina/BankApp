@@ -9,6 +9,7 @@ import PromiseKit
 
 protocol LoanCalculatorViewModelDelegate: AnyObject {
 	func loanCalculatorViewModel(didRequestToUpdateLoan loan: Loan)
+	func loanCalculatorViewModelDidRequestToCloseLoanScreen()
 }
 
 final class LoanCalculatorViewModel {
@@ -45,18 +46,22 @@ final class LoanCalculatorViewModel {
 		process(dependencies.loansService.repay(query: query))
 	}
 
-	private func process(_ promise: Promise<Loan>) {
+	private func process(_ promise: Promise<RepaymentModel>) {
 		onDidStartRequest?()
 		promise.ensure {
 			self.onDidFinishRequest?()
-		}.done { loan in
-			self.handle(loan: loan)
+		}.done { repaymentModel in
+			self.handle(repaymentModel: repaymentModel)
 		}.catch { error in
 			self.onDidReceiveError?(error)
 		}
 	}
 
-	private func handle(loan: Loan) {
+	private func handle(repaymentModel: RepaymentModel) {
+		guard case let .open(loan) = repaymentModel else {
+			delegate?.loanCalculatorViewModelDidRequestToCloseLoanScreen()
+			return
+		}
 		delegate?.loanCalculatorViewModel(didRequestToUpdateLoan: loan)
 	}
 }

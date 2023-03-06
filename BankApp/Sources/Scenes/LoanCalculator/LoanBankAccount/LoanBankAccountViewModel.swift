@@ -19,7 +19,7 @@ final class LoanBankAccountViewModel {
 		guard let bankAccount = bankAccount else {
 			return "Упс.. Ошибка!"
 		}
-		return "\(bankAccount) ₽"
+		return "\(bankAccount.balance) ₽"
 	}
 
 	private var bankAccount: BankAccount?

@@ -55,6 +55,10 @@ final class LoanBankAccountView: UIView, ActivityIndicatorViewDisplaying {
 		viewModel.onDidLoadData = { [weak self] in
 			self?.bankAccountLabel.subtitle = self?.viewModel.balance
 		}
+		
+		viewModel.onDidReceiveError = { [weak self] _ in
+			self?.bankAccountLabel.subtitle = self?.viewModel.balance
+		}
 	}
 
 	required init?(coder: NSCoder) {

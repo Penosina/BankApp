@@ -70,20 +70,20 @@ final class TakeLoanViewModel {
 			let period = Int(periodString)
 		else { return }
 
-		let loanRate = LoanRate(id: 12, name: "Кредитнулся", rate: 77)
-		let loan = Loan(id: 1234,
-						debt: amount,
-						amount: amount,
-						period: period,
-						rate: loanRate,
-						accountDebitingId: 123)
-		delegate?.takeLoanViewModel(didRequestToAddLoan: loan)
+//		let loanRate = LoanRate(id: 12, name: "Кредитнулся", rate: 77)
+//		let loan = Loan(id: 1234,
+//						debt: amount,
+//						amount: amount,
+//						period: period,
+//						rate: loanRate,
+//						accountDebitingId: 123)
+//		delegate?.takeLoanViewModel(didRequestToAddLoan: loan)
 
-//		let query = CreateLoanQuery(loanPeriod: period,
-//									loanAmount: amount,
-//									accountDebitingId: withdrawalAccount.id,
-//									accountReplenishmentId: replenishAccount.id)
-//		process(dependencies.loansService.create(query: query))
+		let query = CreateLoanQuery(loanPeriod: period,
+									loanAmount: amount,
+									accountDebitingId: withdrawalAccount.id,
+									accountReplenishmentId: replenishAccount.id)
+		process(dependencies.loansService.create(query: query))
 	}
 
 	private func process(_ promise: Promise<Loan>) {

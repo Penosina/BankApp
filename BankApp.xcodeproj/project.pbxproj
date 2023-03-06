@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		877CAC8129B668F600AF464A /* RepaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877CAC8029B668F600AF464A /* RepaymentModel.swift */; };
+		877CAC8329B6690B00AF464A /* LoanRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877CAC8229B6690B00AF464A /* LoanRate.swift */; };
 		CE02388229B1F366009540DA /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02388129B1F366009540DA /* ActivityIndicatorView.swift */; };
 		CE02388629B1F829009540DA /* BankAccountCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02388529B1F829009540DA /* BankAccountCellView.swift */; };
 		CE02388829B1F856009540DA /* BankAccountCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02388729B1F856009540DA /* BankAccountCellViewModel.swift */; };
@@ -108,6 +110,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		877CAC8029B668F600AF464A /* RepaymentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepaymentModel.swift; sourceTree = "<group>"; };
+		877CAC8229B6690B00AF464A /* LoanRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanRate.swift; sourceTree = "<group>"; };
 		CE02388129B1F366009540DA /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		CE02388529B1F829009540DA /* BankAccountCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountCellView.swift; sourceTree = "<group>"; };
 		CE02388729B1F856009540DA /* BankAccountCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountCellViewModel.swift; sourceTree = "<group>"; };
@@ -221,6 +225,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		877CAC7F29B668ED00AF464A /* Loans */ = {
+			isa = PBXGroup;
+			children = (
+				877CAC8229B6690B00AF464A /* LoanRate.swift */,
+				CE6803AA29B1FEBF00E917D9 /* Loan.swift */,
+				877CAC8029B668F600AF464A /* RepaymentModel.swift */,
+			);
+			path = Loans;
+			sourceTree = "<group>";
+		};
 		CE02388329B1F37E009540DA /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
@@ -536,9 +550,9 @@
 		CEE25F5E29ADEBC300810CD2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				877CAC7F29B668ED00AF464A /* Loans */,
 				CEE25F5F29ADEBCF00810CD2 /* AuthTokenPair.swift */,
 				CE6803A029B1FA0F00E917D9 /* BankAccount.swift */,
-				CE6803AA29B1FEBF00E917D9 /* Loan.swift */,
 				CE6803AC29B1FF8000E917D9 /* OperationHistory.swift */,
 				CE6803AE29B1FFA200E917D9 /* Operation.swift */,
 			);
@@ -746,6 +760,7 @@
 				CE02388629B1F829009540DA /* BankAccountCellView.swift in Sources */,
 				CEE25F9A29AFCB0A00810CD2 /* BankAccountViewModel.swift in Sources */,
 				CEE25F4629AD1A7B00810CD2 /* DataStoreService.swift in Sources */,
+				877CAC8329B6690B00AF464A /* LoanRate.swift in Sources */,
 				CEE25F3929ABEE3F00810CD2 /* WelcomeViewController.swift in Sources */,
 				CEE25F6E29AE087100810CD2 /* TabBarController.swift in Sources */,
 				CEE25F8329AE35CA00810CD2 /* FeedViewModel.swift in Sources */,
@@ -773,6 +788,7 @@
 				CEE25F5029AD24E400810CD2 /* UIColor+AppColors.swift in Sources */,
 				CE5B4FF229B61439004684EF /* UIView+Container.swift in Sources */,
 				CEE25F7329AE119800810CD2 /* TabBarView.swift in Sources */,
+				877CAC8129B668F600AF464A /* RepaymentModel.swift in Sources */,
 				CE6803C829B4DD0500E917D9 /* OperationHistoryViewModel.swift in Sources */,
 				CEE25F8F29AFCA7900810CD2 /* BankAccountListCoordinator.swift in Sources */,
 				CEE25F2829ABE54C00810CD2 /* ReuseIdentifiable.swift in Sources */,

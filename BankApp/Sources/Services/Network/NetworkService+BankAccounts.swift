@@ -55,7 +55,7 @@ extension NetworkService: BankAccountsNetworkProtocol {
 
 	func create() -> Promise<BankAccount> {
 		request(method: .post,
-				url: URLFactory.BankAccounts.accounts,
+				url: URLFactory.BankAccounts.create,
 				authorized: false)
 	}
 

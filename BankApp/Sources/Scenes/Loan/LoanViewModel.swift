@@ -9,6 +9,7 @@ import Foundation
 
 protocol LoanViewModelDelegate: AnyObject {
 	func loanViewModel(didRequestToRepayLoan loan: Loan)
+	func loanViewModelDidRequestToCloseScreen()
 }
 
 final class LoanViewModel {
@@ -55,5 +56,9 @@ extension LoanViewModel: LoanViewModelInput {
 	func update(loan: Loan) {
 		self.loan = loan
 		onDidUpdateData?()
+	}
+	
+	func didEnd() {
+		delegate?.loanViewModelDidRequestToCloseScreen()
 	}
 }
