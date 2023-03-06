@@ -18,7 +18,7 @@ final class LoanListViewController: UIViewController, ActivityIndicatorViewDispl
 
 	@objc
 	private func createNewLoan() {
-
+		viewModel.didRequestToTakeLoan()
 	}
 
 	init(viewModel: LoanListViewModel) {
@@ -27,9 +27,22 @@ final class LoanListViewController: UIViewController, ActivityIndicatorViewDispl
 		setup()
 	}
 
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		bindToViewModel()
+	}
+
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		viewModel.start()
+	}
+
 	private func setup() {
 		title = "Мои кредиты"
 
+		setupScrollView()
+		setupContentStackView()
+		setupCreateLoanButton()
 		setupActivityIndicatorView()
 	}
 
@@ -57,6 +70,30 @@ final class LoanListViewController: UIViewController, ActivityIndicatorViewDispl
 		createNewLoanButton.addTarget(self,
 									  action: #selector(createNewLoan),
 									  for: .touchUpInside)
+	}
+
+	private func updateLoans() {
+		contentStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+
+		viewModel.loanViewModels.forEach { cellViewModel in
+			let view = LoanCellView(viewModel: cellViewModel)
+			contentStackView.addArrangedSubview(view)
+		}
+		setupCreateLoanButton()
+	}
+
+	private func bindToViewModel() {
+		viewModel.onDidLoadData = { [weak self] in
+			self?.updateLoans()
+		}
+
+		viewModel.onDidStartRequest = { [weak self] in
+			self?.activityIndicatorView.startAnimating()
+		}
+
+		viewModel.onDidFinishRequest = { [weak self] in
+			self?.activityIndicatorView.stopAnimating()
+		}
 	}
 
 	required init?(coder: NSCoder) {

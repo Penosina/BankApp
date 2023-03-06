@@ -11,12 +11,7 @@ final class CalculatorViewController: UIViewController, NavigationBarHiding, Act
 	let activityIndicatorView = ActivityIndicatorView()
 
 	private let scrollView = UIScrollView()
-	private let contentStackView: UIStackView = {
-		let stackView = UIStackView()
-		stackView.axis = .vertical
-		stackView.spacing = 20
-		return stackView
-	}()
+	private let contentStackView = UIStackView()
 	private let balanceView: UIView = {
 		let view = UIView()
 		view.backgroundColor = .accentGray
@@ -107,6 +102,9 @@ final class CalculatorViewController: UIViewController, NavigationBarHiding, Act
 			make.leading.trailing.equalTo(scrollView.frameLayoutGuide).inset(20)
 			make.top.bottom.equalTo(scrollView.contentLayoutGuide).inset(20)
 		}
+
+		contentStackView.axis = .vertical
+		contentStackView.spacing = 20
 	}
 
 	private func setupBalanceView() {

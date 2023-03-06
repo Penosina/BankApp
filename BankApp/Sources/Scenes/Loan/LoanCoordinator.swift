@@ -8,7 +8,11 @@
 import Foundation
 
 struct LoanCoordinatorConfiguration {
+	let loan: Loan
+}
 
+protocol LoanViewModelInput: AnyObject {
+	func update(loan: Loan)
 }
 
 final class LoanCoordinator: ConfigurableCoordinator {
@@ -17,6 +21,8 @@ final class LoanCoordinator: ConfigurableCoordinator {
 
 	var childCoordinators: [Coordinator] = []
 	var onDidFinish: (() -> Void)?
+
+	private weak var viewModel: LoanViewModelInput?
 
 	private let configuration: LoanCoordinatorConfiguration
 
@@ -29,6 +35,30 @@ final class LoanCoordinator: ConfigurableCoordinator {
 	}
 
 	func start(animated: Bool) {
-		
+		showLoan(animated: animated)
+	}
+
+	private func showLoan(animated: Bool) {
+		let viewModel = LoanViewModel(dependencies: appDependency,
+									  loan: configuration.loan)
+		viewModel.delegate = self
+		let vc = LoanViewController(viewModel: viewModel)
+		self.viewModel = viewModel
+		addPopObserver(for: vc)
+		navigationController.pushViewController(vc, animated: animated)
+	}
+}
+
+extension LoanCoordinator: LoanViewModelDelegate {
+	func loanViewModel(didRequestToRepayLoan loan: Loan) {
+		let configuration = LoanCalculatorCoordinatorConfiguration(loan: loan)
+		let coordinator = show(LoanCalculatorCoordinator.self, configuration, animated: true)
+		coordinator.delegate = self
+	}
+}
+
+extension LoanCoordinator: LoanCalculatorCoordinatorDelegate {
+	func loanCalculatorCoordinator(didRequestToUpdateLoan loan: Loan) {
+		viewModel?.update(loan: loan)
 	}
 }

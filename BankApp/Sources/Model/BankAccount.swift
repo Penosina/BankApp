@@ -8,7 +8,7 @@
 import Foundation
 
 struct BankAccount {
-	let id: String
+	let id: Int64
 	let accountNumber: String
 	let balance: Double
 }
@@ -23,7 +23,7 @@ extension BankAccount: Decodable {
 	init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 
-		id = String(try container.decode(Int64.self, forKey: .id))
+		id = try container.decode(Int64.self, forKey: .id)
 		accountNumber = try container.decode(String.self, forKey: .accountNumber)
 		balance = try container.decode(Double.self, forKey: .balance)
 	}

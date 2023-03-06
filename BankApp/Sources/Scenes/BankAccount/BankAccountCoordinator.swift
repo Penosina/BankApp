@@ -9,10 +9,12 @@ import Foundation
 
 protocol BankAccountCoordinatorDelegate: AnyObject {
 	func bankAccountCoordinator(didRequestToCloseAccount bankAccount: BankAccount)
+	func bankAccountCoordinator(didRequestUpdateAccount bankAccount: BankAccount)
 }
 
 protocol BankAccountViewModelInput: AnyObject {
-	func update(with bankAccount: BankAccount)
+	func updateBankAccount(with bankAccount: BankAccount,
+						   and operation: Operation)
 }
 
 struct BankAccountCoordinatorConfiguration {
@@ -63,10 +65,15 @@ extension BankAccountCoordinator: BankAccountViewModelDelegate {
 	func bankAccountViewModel(didRequestCloseAccount bankAccount: BankAccount) {
 		delegate?.bankAccountCoordinator(didRequestToCloseAccount: bankAccount)
 	}
+
+	func bankAccountViewModel(didRequestUpdateAccount bankAccount: BankAccount) {
+		delegate?.bankAccountCoordinator(didRequestUpdateAccount: bankAccount)
+	}
 }
 
 extension BankAccountCoordinator: CalculatorCoordinatorDelegate {
-	func calculatorCoordinator(didUpdateBankAccount bankAccount: BankAccount) {
-		viewModel?.update(with: bankAccount)
+	func calculatorCoordinator(didUpdateBankAccount bankAccount: BankAccount,
+							   andCreateNewOperation operation: Operation) {
+		viewModel?.updateBankAccount(with: bankAccount, and: operation)
 	}
 }

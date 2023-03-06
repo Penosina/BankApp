@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 import PromiseKit
 
-final class NetworkService: NetworkServiceProtocol {
+final class NetworkService {
 	let authInterceptor: AuthenticationInterceptor<OAuthAuthenticator>
 
 	init(authInterceptor: AuthenticationInterceptor<OAuthAuthenticator>) {

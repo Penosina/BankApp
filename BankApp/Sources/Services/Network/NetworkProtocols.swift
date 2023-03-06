@@ -15,18 +15,16 @@ protocol AuthNetworkProtocol {
 
 protocol BankAccountsNetworkProtocol {
 	func getAccounts() -> Promise<[BankAccount]>
-	func getAccount(with accountId: String) -> Promise<BankAccount>
+	func getAccount(accountId: Int64) -> Promise<BankAccount>
 	func withdraw(query: TransferQuery) -> Promise<BankAccount>
 	func replenish(query: TransferQuery) -> Promise<BankAccount>
 	func create() -> Promise<BankAccount>
-	func close(accountId: String) -> Promise<EmptyResponse>
-	func getOperaionHistory(accountId: String) -> Promise<[Operation]>
+	func close(accountId: Int64) -> Promise<EmptyResponse>
+	func getOperaionHistory(accountId: Int64) -> Promise<[Operation]>
 }
 
 protocol LoansNetworkProtocol {
-
-}
-
-protocol OperationHistoryNetworkProtocol {
-
+	func getLoans() -> Promise<[Loan]>
+	func repay(query: RepayLoanQuery) -> Promise<Loan>
+	func create(query: CreateLoanQuery) -> Promise<Loan>
 }

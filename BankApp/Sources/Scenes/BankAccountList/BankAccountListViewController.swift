@@ -34,8 +34,14 @@ final class BankAccountListViewController: UIViewController, ActivityIndicatorVi
 		viewModel.start()
 	}
 
+	func setCreateNewBankAccountButtonHidden(_ isHidden: Bool) {
+		createNewBankAccountButton.isHidden = isHidden
+	}
+
 	private func setup() {
 		title = "Мои счета"
+		view.backgroundColor = .black
+		
 		setupScrollView()
 		setupContentStackView()
 		setupActivityIndicatorView()

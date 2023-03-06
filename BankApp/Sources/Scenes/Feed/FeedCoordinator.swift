@@ -21,7 +21,7 @@ final class FeedCoordinator: Coordinator {
 	}
 
 	func start(animated: Bool) {
-		let viewModel = FeedViewModel(dependencies: appDependency)
+		let viewModel = FeedViewModel()
 		viewModel.delegate = self
 		let vc = FeedViewController(viewModel: viewModel)
 		addPopObserver(for: vc)

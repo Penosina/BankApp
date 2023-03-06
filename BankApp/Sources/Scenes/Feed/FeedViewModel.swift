@@ -13,8 +13,6 @@ protocol FeedViewModelDelegate: AnyObject {
 }
 
 final class FeedViewModel {
-	typealias Dependencies = HasNetworkService
-
 	weak var delegate: FeedViewModelDelegate?
 
 	var didUpdateProfile: (() -> Void)?
@@ -22,12 +20,6 @@ final class FeedViewModel {
 	var onDidFinishGetProfileRequest: (() -> Void)?
 
 	private(set) var profileViewModel: ProfileViewModel? = ProfileViewModel(model: "Penosina")
-
-	private let dependencies: Dependencies
-
-	init(dependencies: Dependencies) {
-		self.dependencies = dependencies
-	}
 
 	func start() {
 		getProfile()

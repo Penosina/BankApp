@@ -9,6 +9,7 @@ import UIKit
 
 enum SystemImageAsset: String {
 	case banknote
+	case creditcard
 }
 
 extension UIImage {

@@ -10,6 +10,8 @@ import UIKit
 final class FullOperationHistoryViewController: UIViewController, NavigationBarHiding, ActivityIndicatorViewDisplaying {
 	let activityIndicatorView = ActivityIndicatorView()
 
+	private let inProgressLabel = UILabel()
+
 	private let viewModel: FullOperationHistoryViewModel
 
 	init(viewModel: FullOperationHistoryViewModel) {
@@ -19,7 +21,22 @@ final class FullOperationHistoryViewController: UIViewController, NavigationBarH
 	}
 
 	private func setup() {
+		setupInProgressLabel()
 		setupActivityIndicatorView()
+	}
+
+	private func setupInProgressLabel() {
+		view.addSubview(inProgressLabel)
+		inProgressLabel.snp.makeConstraints { make in
+			make.leading.trailing.equalToSuperview().inset(16)
+			make.centerY.equalToSuperview()
+		}
+
+		inProgressLabel.font = .header2
+		inProgressLabel.textColor = .white
+		inProgressLabel.numberOfLines = 0
+		inProgressLabel.textAlignment = .center
+		inProgressLabel.text = "Здесь могла быть история всех переводов"
 	}
 
 	required init?(coder: NSCoder) {

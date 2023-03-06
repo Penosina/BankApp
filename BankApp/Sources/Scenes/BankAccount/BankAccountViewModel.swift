@@ -11,6 +11,7 @@ import PromiseKit
 protocol BankAccountViewModelDelegate: AnyObject {
 	func bankAccountViewModel(didRequest action: ActionType, with bankAccount: BankAccount)
 	func bankAccountViewModel(didRequestCloseAccount bankAccount: BankAccount)
+	func bankAccountViewModel(didRequestUpdateAccount bankAccount: BankAccount)
 }
 
 final class BankAccountViewModel {
@@ -79,9 +80,7 @@ final class BankAccountViewModel {
 
 	private func closeAccount() {
 		onDidStartRequest?()
-		firstly {
-			self.dependencies.bankAccountsService.close(accountId: bankAccount.id)
-		}.ensure {
+		self.dependencies.bankAccountsService.close(accountId: bankAccount.id).ensure {
 			self.onDidFinishRequest?()
 		}.done { _ in
 			self.delegate?.bankAccountViewModel(didRequestCloseAccount: self.bankAccount)
@@ -92,7 +91,9 @@ final class BankAccountViewModel {
 }
 
 extension BankAccountViewModel: BankAccountViewModelInput {
-	func update(with bankAccount: BankAccount) {
+	func updateBankAccount(with bankAccount: BankAccount, and operation: Operation) {
 		handle(bankAccount: bankAccount)
+		operationHistoryViewModel.add(operation: operation)
+		delegate?.bankAccountViewModel(didRequestUpdateAccount: bankAccount)
 	}
 }

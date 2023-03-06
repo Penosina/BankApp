@@ -9,10 +9,35 @@ import UIKit
 
 
 final class GrayRoundedButton: UIButton {
+	var shouldShowArrow = true {
+		didSet {
+			arrowImageView.isHidden = shouldShowArrow == false
+		}
+	}
+
+	var imageAsset: ImageAsset = .loan {
+		didSet {
+			imageIconView.imageAsset = imageAsset
+		}
+	}
+
+	var systemImageAsset: SystemImageAsset = .creditcard {
+		didSet {
+			imageIconView.systemImageAsset = systemImageAsset
+		}
+	}
+
+	var titleFont: UIFont? = .body {
+		didSet {
+			textLabel.font = titleFont
+		}
+	}
+
 	private let contentStackView: UIStackView = {
 		let stackView = UIStackView()
 		stackView.axis = .horizontal
 		stackView.spacing = 20
+		stackView.isUserInteractionEnabled = false
 		return stackView
 	}()
 	private let imageIconView = ImageIconView()
@@ -29,12 +54,6 @@ final class GrayRoundedButton: UIButton {
 		return label
 	}()
 
-	private var shouldShowArrow = false {
-		didSet {
-			arrowImageView.isHidden = shouldShowArrow == false
-		}
-	}
-
 	override func setTitle(_ title: String?, for state: UIControl.State) {
 		textLabel.text = title
 	}
@@ -42,11 +61,6 @@ final class GrayRoundedButton: UIButton {
 	init() {
 		super.init(frame: .zero)
 		setup()
-	}
-
-	func configure(with imageAsset: ImageAsset, showArrow: Bool = true) {
-		shouldShowArrow = showArrow
-		imageIconView.imageAsset = imageAsset
 	}
 
 	private func setup() {
@@ -69,7 +83,8 @@ final class GrayRoundedButton: UIButton {
 		addSubview(contentStackView)
 		contentStackView.snp.makeConstraints { make in
 			make.leading.equalToSuperview().inset(20)
-			make.centerY.equalToSuperview()
+			make.top.bottom.equalToSuperview().inset(8)
+			make.trailing.equalToSuperview().inset(20)
 		}
 	}
 
@@ -79,6 +94,7 @@ final class GrayRoundedButton: UIButton {
 
 	private func setupTextLabel() {
 		contentStackView.addArrangedSubview(textLabel)
+		textLabel.numberOfLines = 0
 	}
 
 	private func setupArrowImageView() {

@@ -6,9 +6,10 @@
 //
 
 import PromiseKit
+import Alamofire
 
 struct TransferQuery {
-	let accountId: String
+	let accountId: Int64
 	let amount: Double
 }
 
@@ -24,14 +25,14 @@ extension NetworkService: BankAccountsNetworkProtocol {
 				authorized: false)
 	}
 
-	func getAccount(with accountId: String) -> Promise<BankAccount> {
-		return request(method: .get,
-					   url: URLFactory.BankAccounts.account(id: accountId),
-					   authorized: false)
+	func getAccount(accountId: Int64) -> Promise<BankAccount> {
+		request(method: .get,
+				url: URLFactory.BankAccounts.account(id: accountId),
+				authorized: false)
 	}
 
 	func withdraw(query: TransferQuery) -> Promise<BankAccount> {
-		let parameters: [String: Any] = [
+		let parameters: Parameters = [
 			Keys.accountId: query.accountId,
 			Keys.amount: query.amount
 		]
@@ -42,7 +43,7 @@ extension NetworkService: BankAccountsNetworkProtocol {
 	}
 
 	func replenish(query: TransferQuery) -> Promise<BankAccount> {
-		let parameters: [String: Any] = [
+		let parameters: Parameters = [
 			Keys.accountId: query.accountId,
 			Keys.amount: query.amount
 		]
@@ -58,13 +59,13 @@ extension NetworkService: BankAccountsNetworkProtocol {
 				authorized: false)
 	}
 
-	func close(accountId: String) -> Promise<EmptyResponse> {
+	func close(accountId: Int64) -> Promise<EmptyResponse> {
 		request(method: .delete,
 				url: URLFactory.BankAccounts.close(id: accountId),
 				authorized: false)
 	}
 
-	func getOperaionHistory(accountId: String) -> Promise<[Operation]> {
+	func getOperaionHistory(accountId: Int64) -> Promise<[Operation]> {
 		request(method: .get,
 				url: URLFactory.BankAccounts.operationHistory(id: accountId),
 				authorized: false)

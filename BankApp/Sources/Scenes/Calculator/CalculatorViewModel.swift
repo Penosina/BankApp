@@ -9,7 +9,8 @@ import Foundation
 import PromiseKit
 
 protocol CalculatorViewModelDelegate: AnyObject {
-	func calculatorViewModel(didUpdateBankAccount bankAccount: BankAccount)
+	func calculatorViewModel(didUpdateBankAccount bankAccount: BankAccount,
+							 andCreateNewOperation operation: Operation)
 }
 
 final class CalculatorViewModel {
@@ -55,14 +56,17 @@ final class CalculatorViewModel {
 		}
 
 		let query = TransferQuery(accountId: bankAccount.id, amount: amount)
+		let operaion: Operation
 		let promise: Promise<BankAccount>
 		switch action {
 		case .withdraw:
+			operaion = Operation(value: "\(amount)", executeDate: "Now", type: .out)
 			promise = dependencies.bankAccountsService.withdraw(query: query)
 		case .replenish:
+			operaion = Operation(value: "\(amount)", executeDate: "Now", type: .in)
 			promise = dependencies.bankAccountsService.replenish(query: query)
 		}
-		process(promise)
+		process(promise, with: operaion)
 
 //		let newBalance: Double
 //		switch action {
@@ -77,7 +81,7 @@ final class CalculatorViewModel {
 //		onDidFinishRequest?()
 	}
 
-	private func process(_ promise: Promise<BankAccount>) {
+	private func process(_ promise: Promise<BankAccount>, with operation: Operation) {
 		onDidStartRequest?()
 
 		firstly {
@@ -85,15 +89,16 @@ final class CalculatorViewModel {
 		}.ensure {
 			self.onDidFinishRequest?()
 		}.done { bankAccount in
-			self.handle(bankAccount: bankAccount)
+			self.handle(bankAccount: bankAccount, operation: operation)
 		}.catch { error in
 			self.onDidReceiveError?(error)
 		}
 	}
 
-	private func handle(bankAccount: BankAccount) {
+	private func handle(bankAccount: BankAccount, operation: Operation) {
 		self.bankAccount = bankAccount
 		onDidLoadData?()
-		delegate?.calculatorViewModel(didUpdateBankAccount: bankAccount)
+		delegate?.calculatorViewModel(didUpdateBankAccount: bankAccount,
+									  andCreateNewOperation: operation)
 	}
 }

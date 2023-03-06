@@ -8,7 +8,8 @@
 import Foundation
 
 protocol CalculatorCoordinatorDelegate: AnyObject {
-	func calculatorCoordinator(didUpdateBankAccount bankAccount: BankAccount)
+	func calculatorCoordinator(didUpdateBankAccount bankAccount: BankAccount,
+							   andCreateNewOperation operation: Operation)
 }
 
 struct CalculatorCoordinatorConfiguration {
@@ -51,8 +52,10 @@ final class CalculatorCoordinator: ConfigurableCoordinator {
 }
 
 extension CalculatorCoordinator: CalculatorViewModelDelegate {
-	func calculatorViewModel(didUpdateBankAccount bankAccount: BankAccount) {
-		delegate?.calculatorCoordinator(didUpdateBankAccount: bankAccount)
+	func calculatorViewModel(didUpdateBankAccount bankAccount: BankAccount,
+							 andCreateNewOperation operation: Operation) {
+		delegate?.calculatorCoordinator(didUpdateBankAccount: bankAccount,
+										andCreateNewOperation: operation)
 		navigationController.dismiss(animated: true)
 	}
 }

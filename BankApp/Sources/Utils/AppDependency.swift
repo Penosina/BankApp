@@ -12,12 +12,12 @@ protocol HasDataStore {
 	var dataStore: DataStoreProtocol { get }
 }
 
-protocol HasNetworkService: AnyObject {
-	var bankService: NetworkServiceProtocol { get }
-}
-
 protocol HasBankAccountsService: AnyObject {
 	var bankAccountsService: BankAccountsNetworkProtocol { get }
+}
+
+protocol HasLoansService: AnyObject {
+	var loansService: LoansNetworkProtocol { get }
 }
 
 protocol HasOAuthService: AnyObject {
@@ -57,14 +57,14 @@ extension AppDependency: HasOAuthAuthenticator {
 	}
 }
 
-extension AppDependency: HasNetworkService {
-	var bankService: NetworkServiceProtocol {
+extension AppDependency: HasBankAccountsService {
+	var bankAccountsService: BankAccountsNetworkProtocol {
 		networkService
 	}
 }
 
-extension AppDependency: HasBankAccountsService {
-	var bankAccountsService: BankAccountsNetworkProtocol {
+extension AppDependency: HasLoansService {
+	var loansService: LoansNetworkProtocol {
 		networkService
 	}
 }

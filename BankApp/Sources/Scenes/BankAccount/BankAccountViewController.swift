@@ -33,7 +33,7 @@ final class BankAccountViewController: UIViewController, AlertShowing {
 	private let withdrawButton = CommonButton()
 	private let replenishButton = CommonButton()
 	private let closeAccountButton = CommonButton()
-	private lazy var operationHistoryView = OperationHistoryView(viewModel: self.viewModel.operationHistoryViewModel)
+	private lazy var operationHistoryView = OperationHistoryView(viewModel: viewModel.operationHistoryViewModel)
 
 	private let viewModel: BankAccountViewModel
 

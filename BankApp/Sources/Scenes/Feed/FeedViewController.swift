@@ -11,12 +11,7 @@ final class FeedViewController: UIViewController, NavigationBarHiding, ActivityI
 	let activityIndicatorView = ActivityIndicatorView()
 
 	private let scrollView = UIScrollView()
-	private let contentStackView: UIStackView = {
-		let stackView = UIStackView()
-		stackView.axis = .vertical
-		stackView.spacing = 24
-		return stackView
-	}()
+	private let contentStackView = UIStackView()
 	private let profileView = ProfileView()
 	private let showBankAccountListButton = GrayRoundedButton()
 	private let showLoansButton = GrayRoundedButton()
@@ -70,6 +65,8 @@ final class FeedViewController: UIViewController, NavigationBarHiding, ActivityI
 			make.leading.trailing.equalTo(scrollView.frameLayoutGuide).inset(16)
 			make.top.bottom.equalTo(scrollView.contentLayoutGuide).inset(24)
 		}
+		contentStackView.axis = .vertical
+		contentStackView.spacing = 24
 	}
 
 	private func setupProfileView() {
@@ -79,7 +76,7 @@ final class FeedViewController: UIViewController, NavigationBarHiding, ActivityI
 	private func setupShowBankAccountsButton() {
 		contentStackView.addArrangedSubview(showBankAccountListButton)
 		showBankAccountListButton.setTitle("Счета", for: .normal)
-		showBankAccountListButton.configure(with: .bankAccount)
+		showBankAccountListButton.imageAsset = .bankAccount
 		showBankAccountListButton.addTarget(self,
 											action: #selector(onShowBankAccountListButtonTap),
 											for: .touchUpInside)
@@ -88,7 +85,7 @@ final class FeedViewController: UIViewController, NavigationBarHiding, ActivityI
 	private func setupShowCreditsButton() {
 		contentStackView.addArrangedSubview(showLoansButton)
 		showLoansButton.setTitle("Кредиты", for: .normal)
-		showLoansButton.configure(with: .loan)
+		showLoansButton.imageAsset = .loan
 		showLoansButton.addTarget(self,
 								  action: #selector(onShowLoanListButtonTap),
 								  for: .touchUpInside)
@@ -97,7 +94,8 @@ final class FeedViewController: UIViewController, NavigationBarHiding, ActivityI
 	private func setupLogoutButton() {
 		contentStackView.addArrangedSubview(logoutButton)
 		logoutButton.setTitle("Выйти", for: .normal)
-		logoutButton.configure(with: .logout, showArrow: false)
+		logoutButton.imageAsset = .logout
+		logoutButton.shouldShowArrow = false
 	}
 
 	private func bindToViewModel() {

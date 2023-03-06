@@ -12,7 +12,7 @@ protocol AuthViewModelDelegate: AnyObject {
 }
 
 final class AuthViewModel {
-	typealias Dependencies = HasDataStore & HasNetworkService
+	typealias Dependencies = HasDataStore & HasOAuthService
 
 	weak var delegate: AuthViewModelDelegate?
 

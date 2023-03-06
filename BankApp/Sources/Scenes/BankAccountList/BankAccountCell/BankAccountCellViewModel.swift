@@ -15,20 +15,20 @@ final class BankAccountCellViewModel {
 	weak var delegate: BankAccountCellViewModelDelegate?
 
 	var balance: String {
-		"\(model.balance) ₽"
+		"\(bankAccount.balance) ₽"
 	}
 
 	var accountName: String {
-		model.accountNumber
+		bankAccount.accountNumber
 	}
 
-	private let model: BankAccount
+	private let bankAccount: BankAccount
 
-	init(model: BankAccount) {
-		self.model = model
+	init(bankAccount: BankAccount) {
+		self.bankAccount = bankAccount
 	}
 
 	func didTap() {
-		delegate?.bankAccountCellViewModel(didRequestToShowBankAccount: model)
+		delegate?.bankAccountCellViewModel(didRequestToShowBankAccount: bankAccount)
 	}
 }

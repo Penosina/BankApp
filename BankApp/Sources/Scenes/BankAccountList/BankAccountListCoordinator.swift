@@ -9,6 +9,7 @@ import Foundation
 
 protocol BankAccountListViewModelInput: AnyObject {
 	func remove(bankAccount: BankAccount)
+	func update(bankAccount: BankAccount)
 }
 
 final class BankAccountListCoordinator: Coordinator {
@@ -51,5 +52,9 @@ extension BankAccountListCoordinator: BankAccountCoordinatorDelegate {
 	func bankAccountCoordinator(didRequestToCloseAccount bankAccount: BankAccount) {
 		viewModelInput?.remove(bankAccount: bankAccount)
 		navigationController.popViewController(animated: true)
+	}
+
+	func bankAccountCoordinator(didRequestUpdateAccount bankAccount: BankAccount) {
+		viewModelInput?.update(bankAccount: bankAccount)
 	}
 }

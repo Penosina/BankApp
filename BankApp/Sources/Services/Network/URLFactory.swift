@@ -17,29 +17,26 @@ struct URLFactory {
 		static let auth = authBaseURL + "auth"
 	}
 
-	struct OperationHistory {
-		static let history = baseURL + "history/operations"
-	}
-
 	struct BankAccounts {
 		static let accounts = baseURL + "account/" + clientId
 		static let withdraw = baseURL + "account/withdrawal"
 		static let replenish = baseURL + "account/refill"
 
-		static func account(id: String) -> String {
-			baseURL + "accounts/\(id)"
+		static func account(id: Int64) -> String {
+			baseURL + "account/" + "\(id)"
 		}
 
-		static func close(id: String) -> String {
-			baseURL + "account/" + id
+		static func close(id: Int64) -> String {
+			baseURL + "account/" + "\(id)"
 		}
 
-		static func operationHistory(id: String) -> String {
-			baseURL + "history/operations/" + id
+		static func operationHistory(id: Int64) -> String {
+			baseURL + "history/operations/" + "\(id)"
 		}
 	}
 
 	struct Loans {
-		static let loans = baseURL + "loans"
+		static let loans = baseURL + "loan/" + clientId
+		static let repay = baseURL + "loan/repay/" + clientId
 	}
 }
