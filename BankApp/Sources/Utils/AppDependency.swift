@@ -28,8 +28,18 @@ protocol HasOAuthAuthenticator: AnyObject {
 	var authenticator: OAuthAuthenticatorProtocol { get }
 }
 
-final class AppDependency: HasOAuthService {
+protocol HasDeepLinksService: AnyObject {
+	var deepLinksService: DeepLinksServiceProtocol { get }
+}
+
+protocol HasWebSocketService: AnyObject {
+	var webSocketService: WebSocketService { get }
+}
+
+final class AppDependency: HasOAuthService, HasDeepLinksService, HasWebSocketService {
 	let oAuthService: OAuthServiceProtocol & OAuthAuthenticatorDelegate
+	let deepLinksService: DeepLinksServiceProtocol
+	let webSocketService: WebSocketService
 
 	private let dataStoreService: DataStoreService
 	private let oAuthAuthenticator: OAuthAuthenticator
@@ -37,6 +47,8 @@ final class AppDependency: HasOAuthService {
 	private let networkService: NetworkService
 
 	init() {
+		webSocketService = WebSocketService()
+		deepLinksService = DeepLinksService()
 		dataStoreService = DataStoreService()
 		oAuthAuthenticator = OAuthAuthenticator()
 		authInterceptor = AuthenticationInterceptor(authenticator: oAuthAuthenticator)

@@ -7,12 +7,37 @@
 
 import Foundation
 
+//protocol AuthViewModelDelegate: AnyObject {
+//	func authViewModelDidFinish()
+//}
+//
+//final class AuthViewModel {
+//	typealias Dependencies = HasDataStore & HasOAuthService
+//
+//	weak var delegate: AuthViewModelDelegate?
+//
+//	private let dependencies: Dependencies
+//
+//	init(dependencies: Dependencies) {
+//		self.dependencies = dependencies
+//	}
+//
+//	func auth(login: String) {
+//		// auth actions
+//		dependencies.dataStore.tokens = AuthTokenPair(accessToken: "access token",
+//													  accessTokenExpirationTime: 60,
+//													  refreshToken: "refresh token",
+//													  refreshTokenExpirationTime: 60000)
+//		delegate?.authViewModelDidFinish()
+//	}
+//}
+
 protocol AuthViewModelDelegate: AnyObject {
-	func authViewModelDidFinish()
+  func authViewModelDidReceiveDeepLink()
 }
 
 final class AuthViewModel {
-	typealias Dependencies = HasDataStore & HasOAuthService
+	typealias Dependencies = HasDeepLinksService
 
 	weak var delegate: AuthViewModelDelegate?
 
@@ -20,14 +45,16 @@ final class AuthViewModel {
 
 	init(dependencies: Dependencies) {
 		self.dependencies = dependencies
+		dependencies.deepLinksService.subscribe(self)
 	}
 
-	func auth(login: String) {
-		// auth actions
-		dependencies.dataStore.tokens = AuthTokenPair(accessToken: "access token",
-													  accessTokenExpirationTime: 60,
-													  refreshToken: "refresh token",
-													  refreshTokenExpirationTime: 60000)
-		delegate?.authViewModelDidFinish()
+	deinit {
+		dependencies.deepLinksService.unsubscribe(self)
+	}
+}
+
+extension AuthViewModel: DeepLinkOAuthHandler {
+	func handleDeepLink(with url: URL) {
+		delegate?.authViewModelDidReceiveDeepLink()
 	}
 }

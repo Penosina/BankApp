@@ -19,8 +19,14 @@ final class MainCoordinator: Coordinator {
 		self.appDependency = appDependency
 	}
 
+	func handleDeepLink(with url: URL) {
+		guard let deepLink = DeepLink(url: url) else { return }
+		appDependency.deepLinksService.notify(deepLink: deepLink)
+	}
+
 	func start(animated: Bool) {
 		setupOAuthAuthenticator()
+		setupWebSocketService()
 
 		if appDependency.dataStore.tokens != nil {
 			showTabBar(animated: animated)
@@ -49,6 +55,10 @@ final class MainCoordinator: Coordinator {
 	private func setupOAuthAuthenticator() {
 		appDependency.authenticator.delegate = appDependency.oAuthService
 		appDependency.oAuthService.updateSessionCredentials()
+	}
+
+	private func setupWebSocketService() {
+		appDependency.webSocketService.start()
 	}
 }
 

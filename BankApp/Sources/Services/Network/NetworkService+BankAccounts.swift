@@ -22,13 +22,13 @@ extension NetworkService: BankAccountsNetworkProtocol {
 	func getAccounts() -> Promise<[BankAccount]> {
 		request(method: .get,
 				url: URLFactory.BankAccounts.accounts,
-				authorized: false)
+				authorized: true)
 	}
 
 	func getAccount(accountId: Int64) -> Promise<BankAccount> {
 		request(method: .get,
 				url: URLFactory.BankAccounts.account(id: accountId),
-				authorized: false)
+				authorized: true)
 	}
 
 	func withdraw(query: TransferQuery) -> Promise<BankAccount> {
@@ -38,7 +38,7 @@ extension NetworkService: BankAccountsNetworkProtocol {
 		]
 		return request(method: .post,
 					   url: URLFactory.BankAccounts.withdraw,
-					   authorized: false,
+					   authorized: true,
 					   parameters: parameters)
 	}
 
@@ -49,25 +49,25 @@ extension NetworkService: BankAccountsNetworkProtocol {
 		]
 		return request(method: .post,
 					   url: URLFactory.BankAccounts.replenish,
-					   authorized: false,
+					   authorized: true,
 					   parameters: parameters)
 	}
 
 	func create() -> Promise<BankAccount> {
 		request(method: .post,
 				url: URLFactory.BankAccounts.create,
-				authorized: false)
+				authorized: true)
 	}
 
 	func close(accountId: Int64) -> Promise<EmptyResponse> {
 		request(method: .delete,
 				url: URLFactory.BankAccounts.close(id: accountId),
-				authorized: false)
+				authorized: true)
 	}
 
 	func getOperaionHistory(accountId: Int64) -> Promise<[Operation]> {
 		request(method: .get,
 				url: URLFactory.BankAccounts.operationHistory(id: accountId),
-				authorized: false)
+				authorized: true)
 	}
 }

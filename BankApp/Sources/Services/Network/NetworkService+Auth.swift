@@ -9,9 +9,24 @@ import Foundation
 import PromiseKit
 
 extension NetworkService: AuthNetworkProtocol {
+	private struct Keys {
+		static let token = "token"
+	}
+
+	func loginWithRemoteAccount(token: String?) -> Promise<AuthResponse> {
+		let parameters = [
+			Keys.token: token ?? ""
+		]
+		return request(method: .post,
+					   url: URLFactory.Auth.auth,
+					   parameters: parameters)
+
+	}
+
 	func refresh(refreshToken: String) -> Promise<AuthTokenPair> {
 		request(method: .post,
 				url: "refresh",
+				authorized: true,
 				headers: [.authorization(bearerToken: refreshToken)])
 	}
 

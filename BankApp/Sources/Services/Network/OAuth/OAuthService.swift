@@ -13,6 +13,11 @@ protocol OAuthServiceProtocol: AnyObject {
 }
 
 final class OAuthService: OAuthServiceProtocol {
+	private enum Keys: String {
+		case token
+	}
+
+
 	private let authService: AuthNetworkProtocol
 	private let dataStoreService: DataStoreProtocol
 
@@ -21,10 +26,27 @@ final class OAuthService: OAuthServiceProtocol {
 		self.dataStoreService = dataStoreProtocol
 	}
 
+	func loginWithRemoteAccount(with deepLinkURL: URL) -> Promise<EmptyResponse> {
+		firstly {
+			authService.loginWithRemoteAccount(token: getToken(from: deepLinkURL))
+		}
+		.map { authResponse in
+			self.updateTokens(authResponse.tokens)
+			return EmptyResponse()
+		}
+	}
+
 	func updateSessionCredentials() {
 		let tokens = dataStoreService.tokens
 		authService.updateSessionCredentials(with: tokens)
 	}
+
+	private func getToken(from url: URL) -> String? {
+		guard let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return nil }
+		let item = urlComponents.queryItems?.first { $0.name == Keys.token.rawValue }
+		return item?.value
+	}
+
 
 	private func updateTokens(_ tokens: AuthTokenPair) {
 		dataStoreService.tokens = tokens

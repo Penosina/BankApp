@@ -9,7 +9,7 @@ import PromiseKit
 import Foundation
 
 final class OperationHistoryViewModel {
-	typealias Dependencies = HasBankAccountsService
+	typealias Dependencies = HasBankAccountsService & HasWebSocketService
 
 	var onDidStartRequest: (() -> Void)?
 	var onDidFinishRequest: (() -> Void)?
@@ -26,6 +26,11 @@ final class OperationHistoryViewModel {
 	init(dependencies: Dependencies, bankAccount: BankAccount) {
 		self.dependencies = dependencies
 		self.bankAccount = bankAccount
+		self.dependencies.webSocketService.register(self)
+	}
+
+	deinit {
+		dependencies.webSocketService.unregister(self)
 	}
 
 	func start() {
@@ -67,5 +72,16 @@ final class OperationHistoryViewModel {
 
 	private func convertToViewModels(operations: [Operation]) {
 		operationViewModels = operations.map { OperationViewModel(operation: $0) }
+	}
+}
+
+extension OperationHistoryViewModel: WebSocketListener {
+	func didLoad(operation: Operation) {
+		self.operations.insert(operation, at: 0)
+		handle(operations: operations)
+	}
+
+	func errorLoadingOperation(_ error: Error) {
+		print(error)
 	}
 }

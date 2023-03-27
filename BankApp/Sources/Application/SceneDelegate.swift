@@ -23,4 +23,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		mainCoordinator = MainCoordinator(navigationController: navigationController)
 		mainCoordinator?.start(animated: false)
 	}
+
+	func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+		guard let url = URLContexts.first?.url else { return }
+
+		mainCoordinator?.handleDeepLink(with: url)
+	}
 }

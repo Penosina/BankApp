@@ -12,6 +12,13 @@
 		CE02388229B1F366009540DA /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02388129B1F366009540DA /* ActivityIndicatorView.swift */; };
 		CE02388629B1F829009540DA /* BankAccountCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02388529B1F829009540DA /* BankAccountCellView.swift */; };
 		CE02388829B1F856009540DA /* BankAccountCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02388729B1F856009540DA /* BankAccountCellViewModel.swift */; };
+		CE51825A29CEB00200C4F52C /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51825929CEB00200C4F52C /* DeepLink.swift */; };
+		CE51825C29CEB09B00C4F52C /* DeepLinkHandlerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51825B29CEB09B00C4F52C /* DeepLinkHandlerProtocols.swift */; };
+		CE51825E29CEB0B700C4F52C /* DeepLinksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51825D29CEB0B700C4F52C /* DeepLinksService.swift */; };
+		CE51826029CEBD8200C4F52C /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51825F29CEBD8200C4F52C /* AuthResponse.swift */; };
+		CE51826429D1659900C4F52C /* WebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51826329D1659900C4F52C /* WebSocketService.swift */; };
+		CE51826829D1736B00C4F52C /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = CE51826729D1736B00C4F52C /* Starscream */; };
+		CE51826F29D17EBE00C4F52C /* WebSocketNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51826E29D17EBE00C4F52C /* WebSocketNotifier.swift */; };
 		CE5B4FDE29B4F51F004684EF /* LoanListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B4FDD29B4F51F004684EF /* LoanListCoordinator.swift */; };
 		CE5B4FE029B4F556004684EF /* LoanListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B4FDF29B4F556004684EF /* LoanListViewController.swift */; };
 		CE5B4FE229B4F55D004684EF /* LoanListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B4FE129B4F55D004684EF /* LoanListViewModel.swift */; };
@@ -115,6 +122,12 @@
 		CE02388129B1F366009540DA /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		CE02388529B1F829009540DA /* BankAccountCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountCellView.swift; sourceTree = "<group>"; };
 		CE02388729B1F856009540DA /* BankAccountCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountCellViewModel.swift; sourceTree = "<group>"; };
+		CE51825929CEB00200C4F52C /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
+		CE51825B29CEB09B00C4F52C /* DeepLinkHandlerProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkHandlerProtocols.swift; sourceTree = "<group>"; };
+		CE51825D29CEB0B700C4F52C /* DeepLinksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinksService.swift; sourceTree = "<group>"; };
+		CE51825F29CEBD8200C4F52C /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
+		CE51826329D1659900C4F52C /* WebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketService.swift; sourceTree = "<group>"; };
+		CE51826E29D17EBE00C4F52C /* WebSocketNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketNotifier.swift; sourceTree = "<group>"; };
 		CE5B4FDD29B4F51F004684EF /* LoanListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanListCoordinator.swift; sourceTree = "<group>"; };
 		CE5B4FDF29B4F556004684EF /* LoanListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanListViewController.swift; sourceTree = "<group>"; };
 		CE5B4FE129B4F55D004684EF /* LoanListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanListViewModel.swift; sourceTree = "<group>"; };
@@ -219,6 +232,7 @@
 				CEE25F1029ABDA0800810CD2 /* Alamofire in Frameworks */,
 				CEE25F5529ADC06E00810CD2 /* PromiseKit in Frameworks */,
 				CEE25F1329ABDA1600810CD2 /* SnapKit in Frameworks */,
+				CE51826829D1736B00C4F52C /* Starscream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +265,25 @@
 				CE02388729B1F856009540DA /* BankAccountCellViewModel.swift */,
 			);
 			path = BankAccountCell;
+			sourceTree = "<group>";
+		};
+		CE51825829CEAFF700C4F52C /* DeepLink */ = {
+			isa = PBXGroup;
+			children = (
+				CE51825929CEB00200C4F52C /* DeepLink.swift */,
+				CE51825B29CEB09B00C4F52C /* DeepLinkHandlerProtocols.swift */,
+				CE51825D29CEB0B700C4F52C /* DeepLinksService.swift */,
+			);
+			path = DeepLink;
+			sourceTree = "<group>";
+		};
+		CE51826529D1728F00C4F52C /* WebSocket */ = {
+			isa = PBXGroup;
+			children = (
+				CE51826329D1659900C4F52C /* WebSocketService.swift */,
+				CE51826E29D17EBE00C4F52C /* WebSocketNotifier.swift */,
+			);
+			path = WebSocket;
 			sourceTree = "<group>";
 		};
 		CE5B4FE329B4F8EF004684EF /* LoanCell */ = {
@@ -495,6 +528,7 @@
 		CEE25F4029AD114E00810CD2 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				CE51825829CEAFF700C4F52C /* DeepLink */,
 				CEE25F4429AD1A5800810CD2 /* DataStore */,
 				CEE25F4329AD1A5100810CD2 /* Network */,
 			);
@@ -504,6 +538,7 @@
 		CEE25F4329AD1A5100810CD2 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				CE51826529D1728F00C4F52C /* WebSocket */,
 				CEE25F6729ADEF9A00810CD2 /* OAuth */,
 				CEE25F6629ADEF8F00810CD2 /* Responses */,
 				CEE25F6529ADEF5800810CD2 /* NetworkService */,
@@ -573,6 +608,7 @@
 			isa = PBXGroup;
 			children = (
 				CEE25F5A29ADCC1100810CD2 /* EmptyResponse.swift */,
+				CE51825F29CEBD8200C4F52C /* AuthResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -678,6 +714,7 @@
 				CEE25F0F29ABDA0800810CD2 /* Alamofire */,
 				CEE25F1229ABDA1600810CD2 /* SnapKit */,
 				CEE25F5429ADC06E00810CD2 /* PromiseKit */,
+				CE51826729D1736B00C4F52C /* Starscream */,
 			);
 			productName = BankApp;
 			productReference = CEE25EF729ABD93800810CD2 /* BankApp.app */;
@@ -711,6 +748,7 @@
 				CEE25F0E29ABDA0800810CD2 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				CEE25F1129ABDA1600810CD2 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				CEE25F5329ADC06E00810CD2 /* XCRemoteSwiftPackageReference "PromiseKit" */,
+				CE51826629D1736B00C4F52C /* XCRemoteSwiftPackageReference "Starscream" */,
 			);
 			productRefGroup = CEE25EF829ABD93800810CD2 /* Products */;
 			projectDirPath = "";
@@ -759,6 +797,7 @@
 				CEE25F4229AD1A4C00810CD2 /* NetworkService.swift in Sources */,
 				CE02388629B1F829009540DA /* BankAccountCellView.swift in Sources */,
 				CEE25F9A29AFCB0A00810CD2 /* BankAccountViewModel.swift in Sources */,
+				CE51825A29CEB00200C4F52C /* DeepLink.swift in Sources */,
 				CEE25F4629AD1A7B00810CD2 /* DataStoreService.swift in Sources */,
 				877CAC8329B6690B00AF464A /* LoanRate.swift in Sources */,
 				CEE25F3929ABEE3F00810CD2 /* WelcomeViewController.swift in Sources */,
@@ -782,6 +821,7 @@
 				CE5B4FDE29B4F51F004684EF /* LoanListCoordinator.swift in Sources */,
 				CE6803C029B3CA3500E917D9 /* CalculatorCoordinator.swift in Sources */,
 				CEE25F7529AE11BB00810CD2 /* TabKind.swift in Sources */,
+				CE51825E29CEB0B700C4F52C /* DeepLinksService.swift in Sources */,
 				CEE25EFB29ABD93800810CD2 /* AppDelegate.swift in Sources */,
 				CEE25F7B29AE2B3600810CD2 /* FullOperationHistoryCoordinator.swift in Sources */,
 				CEE25F8729AF5EF800810CD2 /* GrayRoundedButton.swift in Sources */,
@@ -794,6 +834,7 @@
 				CEE25F2829ABE54C00810CD2 /* ReuseIdentifiable.swift in Sources */,
 				CEE25F7D29AE2B8300810CD2 /* FullOperationHistoryViewController.swift in Sources */,
 				CEE25F5D29ADEAF100810CD2 /* OAuthAuthenticator.swift in Sources */,
+				CE51825C29CEB09B00C4F52C /* DeepLinkHandlerProtocols.swift in Sources */,
 				CEE25F9129AFCA8800810CD2 /* BankAccountListViewController.swift in Sources */,
 				CE5B4FEC29B51B08004684EF /* LoanViewController.swift in Sources */,
 				CE5B500729B62E00004684EF /* LoanBankAccountViewModel.swift in Sources */,
@@ -804,6 +845,7 @@
 				CE6803CB29B4DDF400E917D9 /* OperationView.swift in Sources */,
 				CEE25F6929ADF05A00810CD2 /* OAuthService.swift in Sources */,
 				CE5B500229B628C2004684EF /* LoanCalculatorViewController.swift in Sources */,
+				CE51826F29D17EBE00C4F52C /* WebSocketNotifier.swift in Sources */,
 				CE5B500529B62DDB004684EF /* LoanBankAccountView.swift in Sources */,
 				CEE25F6429ADEF1D00810CD2 /* NetworkProtocols.swift in Sources */,
 				CE6803C629B4DCFB00E917D9 /* OperationHistoryView.swift in Sources */,
@@ -820,6 +862,8 @@
 				CEE25F7929AE2AF900810CD2 /* FeedCoordinator.swift in Sources */,
 				CE5B4FF429B61631004684EF /* TwoLabel.swift in Sources */,
 				CE5B4FE929B50911004684EF /* AlertShowing.swift in Sources */,
+				CE51826429D1659900C4F52C /* WebSocketService.swift in Sources */,
+				CE51826029CEBD8200C4F52C /* AuthResponse.swift in Sources */,
 				CE5B4FF729B61ADF004684EF /* TakeLoanCoordinator.swift in Sources */,
 				CEE25F4B29AD20B500810CD2 /* UIFont+AppFonts.swift .swift in Sources */,
 				CE6803CD29B4DDFB00E917D9 /* OperationViewModel.swift in Sources */,
@@ -1042,6 +1086,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CE51826629D1736B00C4F52C /* XCRemoteSwiftPackageReference "Starscream" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/daltoniam/Starscream";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		CEE25F0E29ABDA0800810CD2 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -1069,6 +1121,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CE51826729D1736B00C4F52C /* Starscream */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE51826629D1736B00C4F52C /* XCRemoteSwiftPackageReference "Starscream" */;
+			productName = Starscream;
+		};
 		CEE25F0F29ABDA0800810CD2 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CEE25F0E29ABDA0800810CD2 /* XCRemoteSwiftPackageReference "Alamofire" */;

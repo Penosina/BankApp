@@ -46,7 +46,7 @@ extension WelcomeCoordinator: WelcomeViewModelDelegate {
 }
 
 extension WelcomeCoordinator: AuthCoordinatorDelegate {
-	func authCoordinatorDidFinish() {
+	func authCoordinatorDidFinish(hasReceivedDeepLink: Bool) {
 		delegate?.welcomeCoordinatorDidFinish()
 		onDidFinish?()
 	}

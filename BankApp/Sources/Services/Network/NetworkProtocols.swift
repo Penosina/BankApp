@@ -9,6 +9,7 @@ import Foundation
 import PromiseKit
 
 protocol AuthNetworkProtocol {
+	func loginWithRemoteAccount(token: String?) -> Promise<AuthResponse>
 	func refresh(refreshToken: String) -> Promise<AuthTokenPair>
 	func updateSessionCredentials(with tokens: AuthTokenPair?)
 }
