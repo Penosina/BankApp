@@ -9,6 +9,7 @@ import Foundation
 import PromiseKit
 
 protocol OAuthServiceProtocol: AnyObject {
+	func loginWithRemoteAccount(with deepLinkURL: URL) -> Promise<EmptyResponse>
 	func updateSessionCredentials()
 }
 
@@ -16,7 +17,6 @@ final class OAuthService: OAuthServiceProtocol {
 	private enum Keys: String {
 		case token
 	}
-
 
 	private let authService: AuthNetworkProtocol
 	private let dataStoreService: DataStoreProtocol

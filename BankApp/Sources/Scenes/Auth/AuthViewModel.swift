@@ -37,9 +37,14 @@ protocol AuthViewModelDelegate: AnyObject {
 }
 
 final class AuthViewModel {
-	typealias Dependencies = HasDeepLinksService
+	typealias Dependencies = HasDeepLinksService & HasOAuthService
 
 	weak var delegate: AuthViewModelDelegate?
+
+	var onDidReceiveError: ((Error) -> Void)?
+	var onDidStartRequest: (() -> Void)?
+	var onDidFinishRequest: (() -> Void)?
+	var onDidLoadData: (() -> Void)?
 
 	private let dependencies: Dependencies
 
@@ -55,6 +60,13 @@ final class AuthViewModel {
 
 extension AuthViewModel: DeepLinkOAuthHandler {
 	func handleDeepLink(with url: URL) {
-		delegate?.authViewModelDidReceiveDeepLink()
+		onDidStartRequest?()
+		dependencies.oAuthService.loginWithRemoteAccount(with: url).ensure {
+			self.onDidFinishRequest?()
+		}.done { _ in
+			self.delegate?.authViewModelDidReceiveDeepLink()
+		}.catch { error in
+			self.onDidReceiveError?(error)
+		}
 	}
 }
