@@ -56,10 +56,17 @@ final class BankAccountCoordinator: ConfigurableCoordinator {
 
 extension BankAccountCoordinator: BankAccountViewModelDelegate {
 	func bankAccountViewModel(didRequest action: ActionType, with bankAccount: BankAccount) {
-		let configuration = CalculatorCoordinatorConfiguration(bankAccount: bankAccount,
-															   action: action)
-		let coordinator = show(CalculatorCoordinator.self, configuration, animated: true)
-		coordinator.delegate = self
+		switch action {
+		case .makeTransfer:
+			let configuration = MakeTransferCoordinatorConfiguration(bankAccount: bankAccount)
+			let coordinator = show(MakeTransferCoordinator.self, configuration, animated: true)
+			coordinator.delegate = self
+		case .replenish, .withdraw:
+			let configuration = CalculatorCoordinatorConfiguration(bankAccount: bankAccount,
+																   action: action)
+			let coordinator = show(CalculatorCoordinator.self, configuration, animated: true)
+			coordinator.delegate = self
+		}
 	}
 
 	func bankAccountViewModel(didRequestCloseAccount bankAccount: BankAccount) {
@@ -74,6 +81,13 @@ extension BankAccountCoordinator: BankAccountViewModelDelegate {
 extension BankAccountCoordinator: CalculatorCoordinatorDelegate {
 	func calculatorCoordinator(didUpdateBankAccount bankAccount: BankAccount,
 							   andCreateNewOperation operation: Operation) {
+		viewModel?.updateBankAccount(with: bankAccount, and: operation)
+	}
+}
+
+extension BankAccountCoordinator: MakeTransferCoordinatorDelegate {
+	func makeTransferCoordinator(didUpdateBankAccount bankAccount: BankAccount,
+								 andCreateNewOperation operation: Operation) {
 		viewModel?.updateBankAccount(with: bankAccount, and: operation)
 	}
 }

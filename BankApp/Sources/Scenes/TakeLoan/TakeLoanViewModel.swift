@@ -31,7 +31,6 @@ final class TakeLoanViewModel {
 		return "Счет зачисления: \(replenishAccount.accountNumber)"
 	}
 
-
 	weak var delegate: TakeLoanViewModelDelegate?
 
 	private var replenishAccount: BankAccount?
@@ -44,14 +43,14 @@ final class TakeLoanViewModel {
 	}
 
 	func selectReplenishAccount() {
-		delegate?.takeLoanViewModelDidRequestToOpenBankAccountList() { [weak self] bankAccount in
+		delegate?.takeLoanViewModelDidRequestToOpenBankAccountList { [weak self] bankAccount in
 			self?.replenishAccount = bankAccount
 			self?.onDidUpdateReplenishAccount?()
 		}
 	}
 
 	func selectWithdrawalAccount() {
-		delegate?.takeLoanViewModelDidRequestToOpenBankAccountList() { [weak self] bankAccount in
+		delegate?.takeLoanViewModelDidRequestToOpenBankAccountList { [weak self] bankAccount in
 			self?.withdrawalAccount = bankAccount
 			self?.onDidUpdateWithdrawalAccount?()
 		}

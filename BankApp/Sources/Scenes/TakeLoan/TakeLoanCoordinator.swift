@@ -20,6 +20,8 @@ final class TakeLoanCoordinator: Coordinator {
 	var childCoordinators: [Coordinator] = []
 	var onDidFinish: (() -> Void)?
 
+	private var didSelectBankAccountHandler: ((BankAccount) -> Void)?
+
 	init(navigationController: NavigationController, appDependency: AppDependency) {
 		self.navigationController = navigationController
 		self.appDependency = appDependency
@@ -44,7 +46,16 @@ extension TakeLoanCoordinator: TakeLoanViewModelDelegate {
 	}
 
 	func takeLoanViewModelDidRequestToOpenBankAccountList(handler: @escaping (BankAccount) -> Void) {
-		let configuration = SelectBankAccountCoordinatorConfiguration(didSelectBankAccountHandler: handler)
-		show(SelectBankAccountCoordinator.self, configuration, animated: true)
+		didSelectBankAccountHandler = handler
+		let configuration = SelectBankAccountCoordinatorConfiguration(getAccountsBehaviour: .getAll)
+		let coordinator = show(SelectBankAccountCoordinator.self, configuration, animated: true)
+		coordinator.delegate = self
+	}
+}
+
+extension TakeLoanCoordinator: SelectBankAccountCoordinatorDelegate {
+	func selectBankAccountCoordinator(didSelectBankAccount bankAccount: BankAccount) {
+		didSelectBankAccountHandler?(bankAccount)
+		didSelectBankAccountHandler = nil
 	}
 }

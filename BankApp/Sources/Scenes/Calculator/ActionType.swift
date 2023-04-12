@@ -6,5 +6,5 @@
 //
 
 enum ActionType {
-	case withdraw, replenish
+	case withdraw, replenish, makeTransfer
 }

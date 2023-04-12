@@ -11,6 +11,8 @@ struct Operation: Decodable {
 	let value: String
 	let executeDate: String
 	let type: OperationType
+	let inAccountNumber: String?
+	let outAccountNumber: String?
 }
 
 enum OperationType: String, Decodable {

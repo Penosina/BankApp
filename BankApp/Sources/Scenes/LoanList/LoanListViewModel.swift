@@ -41,22 +41,22 @@ final class LoanListViewModel {
 	}
 
 	private func getLoans() {
-//		let loanRate = LoanRate(id: 12, name: "Кредит Х", rate: 8)
-//		let loans = [
-//			Loan(id: 10, debt: 76, amount: 12345, period: 6, rate: loanRate, accountDebitingId: 1),
-//			Loan(id: 11, debt: 190, amount: 12345, period: 12, rate: loanRate, accountDebitingId: 2),
-//			Loan(id: 12, debt: 334, amount: 12345, period: 24, rate: loanRate, accountDebitingId: 3),
-//			Loan(id: 13, debt: 7777, amount: 12345, period: 10, rate: loanRate, accountDebitingId: 4)
-//		]
-//		handle(loans: loans)
-		onDidStartRequest?()
-		dependencies.loansService.getLoans().ensure {
-			self.onDidFinishRequest?()
-		}.done { loans in
-			self.handle(loans: loans)
-		}.catch { error in
-			self.onDidReceiveError?(error)
-		}
+		let loanRate = LoanRate(id: 12, name: "Кредит Х", rate: 8)
+		let loans = [
+			Loan(id: 10, rate: loanRate, period: 6, amount: 12345,  accountDebitingId: 1, debt: 76),
+			Loan(id: 11, rate: loanRate, period: 12, amount: 12345, accountDebitingId: 2, debt: 190),
+			Loan(id: 12, rate: loanRate, period: 24, amount: 12345, accountDebitingId: 3, debt: 334),
+			Loan(id: 13, rate: loanRate, period: 10, amount: 12345, accountDebitingId: 4, debt: 7777)
+		]
+		handle(loans: loans)
+//		onDidStartRequest?()
+//		dependencies.loansService.getLoans().ensure {
+//			self.onDidFinishRequest?()
+//		}.done { loans in
+//			self.handle(loans: loans)
+//		}.catch { error in
+//			self.onDidReceiveError?(error)
+//		}
 	}
 
 	private func handle(loans: [Loan]) {

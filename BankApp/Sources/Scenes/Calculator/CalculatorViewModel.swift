@@ -29,6 +29,8 @@ final class CalculatorViewModel {
 			return "Пополнить"
 		case .withdraw:
 			return "Снять"
+		case .makeTransfer:
+			return "Ошибка"
 		}
 	}
 	var balanceTitle: String {
@@ -56,15 +58,26 @@ final class CalculatorViewModel {
 		}
 
 		let query = TransferQuery(accountId: bankAccount.id, amount: amount)
-		let operaion: Operation
-		let promise: Promise<BankAccount>
+		let operaion: Operation?
+		let promise: Promise<BankAccount>?
 		switch action {
 		case .withdraw:
-			operaion = Operation(value: "\(amount)", executeDate: "Now", type: .out)
+			operaion = Operation(value: "\(amount)",
+								 executeDate: "Now",
+								 type: .out,
+								 inAccountNumber: bankAccount.accountNumber,
+								 outAccountNumber: "XXX")
 			promise = dependencies.bankAccountsService.withdraw(query: query)
 		case .replenish:
-			operaion = Operation(value: "\(amount)", executeDate: "Now", type: .in)
+			operaion = Operation(value: "\(amount)",
+								 executeDate: "Now",
+								 type: .in,
+								 inAccountNumber: "ZZZ",
+								 outAccountNumber: bankAccount.accountNumber)
 			promise = dependencies.bankAccountsService.replenish(query: query)
+		case .makeTransfer:
+			promise = nil
+			operaion = nil
 		}
 		process(promise, with: operaion)
 
@@ -81,7 +94,9 @@ final class CalculatorViewModel {
 //		onDidFinishRequest?()
 	}
 
-	private func process(_ promise: Promise<BankAccount>, with operation: Operation) {
+	private func process(_ promise: Promise<BankAccount>?, with operation: Operation?) {
+		guard let promise, let operation else { fatalError("Случилось что-то плохое((") }
+
 		onDidStartRequest?()
 
 		firstly {

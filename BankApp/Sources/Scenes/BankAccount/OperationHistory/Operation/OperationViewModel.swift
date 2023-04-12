@@ -35,6 +35,14 @@ final class OperationViewModel {
 		}
 	}
 
+	var inAccountNumber: String? {
+		operation.inAccountNumber
+	}
+
+	var outAccountNumber: String? {
+		operation.outAccountNumber
+	}
+
 	var date: String {
 //		let dateFormatter = DateFormatter()
 //		dateFormatter.dateFormat = "dd MMM yyyy, HH:mm"

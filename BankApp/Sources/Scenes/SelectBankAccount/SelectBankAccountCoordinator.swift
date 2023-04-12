@@ -7,11 +7,20 @@
 
 import Foundation
 
+protocol SelectBankAccountCoordinatorDelegate: AnyObject {
+	func selectBankAccountCoordinator(didSelectBankAccount bankAccount: BankAccount)
+}
+
+enum GetAccountsBehaviourType {
+	case getAll, getOwn
+}
+
 struct SelectBankAccountCoordinatorConfiguration {
-	let didSelectBankAccountHandler: (BankAccount) -> Void
+	let getAccountsBehaviour: GetAccountsBehaviourType
 }
 
 final class SelectBankAccountCoordinator: ConfigurableCoordinator {
+	weak var delegate: SelectBankAccountCoordinatorDelegate?
 
 	let navigationController: NavigationController
 	let appDependency: AppDependency
@@ -34,7 +43,8 @@ final class SelectBankAccountCoordinator: ConfigurableCoordinator {
 	}
 
 	private func showBankAccountList(animated: Bool) {
-		let viewModel = BankAccountListViewModel(dependencies: appDependency)
+		let viewModel = BankAccountListViewModel(dependencies: appDependency,
+												 getAccountsBehaviour: configuration.getAccountsBehaviour)
 		viewModel.delegate = self
 		let vc = BankAccountListViewController(viewModel: viewModel)
 		vc.setCreateNewBankAccountButtonHidden(true)
@@ -45,7 +55,7 @@ final class SelectBankAccountCoordinator: ConfigurableCoordinator {
 
 extension SelectBankAccountCoordinator: BankAccountListViewModelDelegate {
 	func bankAccountListViewModel(didRequestToShowBankAccount bankAccount: BankAccount) {
-		configuration.didSelectBankAccountHandler(bankAccount)
+		delegate?.selectBankAccountCoordinator(didSelectBankAccount: bankAccount)
 		navigationController.dismiss(animated: true)
 	}
 }

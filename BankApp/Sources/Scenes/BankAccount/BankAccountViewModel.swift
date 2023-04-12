@@ -15,7 +15,7 @@ protocol BankAccountViewModelDelegate: AnyObject {
 }
 
 final class BankAccountViewModel {
-	typealias Dependencies = HasBankAccountsService
+	typealias Dependencies = HasBankAccountsService & HasWebSocketService
 
 	weak var delegate: BankAccountViewModelDelegate?
 
@@ -54,6 +54,10 @@ final class BankAccountViewModel {
 
 	func didRequestReplenish() {
 		delegate?.bankAccountViewModel(didRequest: .replenish, with: bankAccount)
+	}
+
+	func didRequestMakeTransfer() {
+		delegate?.bankAccountViewModel(didRequest: .makeTransfer, with: bankAccount)
 	}
 
 	func didRequestCloseAccount() {

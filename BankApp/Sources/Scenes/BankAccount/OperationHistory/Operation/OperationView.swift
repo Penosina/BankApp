@@ -11,6 +11,8 @@ final class OperationView: UIView {
 	private let imageIconView = ImageIconView()
 	private let stackView = UIStackView()
 	private let textLabel = UILabel()
+	private let inAccountNumberLabel = UILabel()
+	private let outAccountNumberLabel = UILabel()
 	private let dateLabel = UILabel()
 
 	private let viewModel: OperationViewModel
@@ -29,6 +31,8 @@ final class OperationView: UIView {
 		setupImageIconView()
 		setupStackView()
 		setupTextLabel()
+		setupInAccountNumberLabel()
+		setupOutAccountNumberLabel()
 		setupDateLabel()
 	}
 
@@ -58,6 +62,24 @@ final class OperationView: UIView {
 		textLabel.font = .body
 		textLabel.textColor = .white
 		textLabel.text = viewModel.text
+	}
+
+	private func setupInAccountNumberLabel() {
+		if let inAccountNumber = viewModel.inAccountNumber {
+			stackView.addArrangedSubview(inAccountNumberLabel)
+			inAccountNumberLabel.text = "Счет отправителя: №\(inAccountNumber)"
+			inAccountNumberLabel.font = .body
+			inAccountNumberLabel.textColor = .white
+		}
+	}
+
+	private func setupOutAccountNumberLabel() {
+		if let outAccountNumber = viewModel.outAccountNumber {
+			stackView.addArrangedSubview(outAccountNumberLabel)
+			outAccountNumberLabel.text = "Счет получателя: №\(outAccountNumber)"
+			outAccountNumberLabel.font = .body
+			outAccountNumberLabel.textColor = .white
+		}
 	}
 
 	private func setupDateLabel() {

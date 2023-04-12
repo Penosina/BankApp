@@ -19,9 +19,11 @@ struct URLFactory {
 
 	struct BankAccounts {
 		static let accounts = baseURL + "account/" + clientId + "/client"
+		static let accountsToTransfer = baseURL + "account/" + clientId + "/client"
 		static let create = baseURL + "account/" + clientId
 		static let withdraw = baseURL + "account/withdrawal"
 		static let replenish = baseURL + "account/refill"
+		static let makeTransfer = baseURL + "account/make-transfer"
 
 		static func account(id: Int64) -> String {
 			baseURL + "account/" + "\(id)"

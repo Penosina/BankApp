@@ -27,9 +27,11 @@ final class BankAccountListViewModel {
 	private var bankAccounts: [BankAccount] = []
 
 	private let dependencies: Dependencies
+	private let getAccountsBehaviour: GetAccountsBehaviourType
 
-	init(dependencies: Dependencies) {
+	init(dependencies: Dependencies, getAccountsBehaviour: GetAccountsBehaviourType) {
 		self.dependencies = dependencies
+		self.getAccountsBehaviour = getAccountsBehaviour
 	}
 
 	func start() {
@@ -41,27 +43,32 @@ final class BankAccountListViewModel {
 	}
 
 	private func getBankAccounts() {
-//		let bankAccounts = [
-//			BankAccount(id: 1, accountNumber: "1", balance: 1234.24),
-//			BankAccount(id: 2, accountNumber: "223", balance: 0.12),
-//			BankAccount(id: 3, accountNumber: "234543", balance: 2121232324.24),
-//			BankAccount(id: 4, accountNumber: "2123", balance: 1234.24),
-//			BankAccount(id: 5, accountNumber: "Мой кеш", balance: 1234.24),
-//			BankAccount(id: 6, accountNumber: "фывф", balance: 1234.24),
-//			BankAccount(id: 7, accountNumber: "88855", balance: 1234.24),
-//		]
-//		handle(bankAccounts)
-		onDidStartRequest?()
-		firstly {
-			dependencies.bankAccountsService.getAccounts()
-		}.ensure {
-			self.onDidFinishRequest?()
-		}.done { bankAccounts in
-			self.handle(bankAccounts)
-			self.onDidLoadData?()
-		}.catch { error in
-			self.onDidReceiveError?(error)
-		}
+		let bankAccounts = [
+			BankAccount(id: 1, accountNumber: "1", balance: 1234.24),
+			BankAccount(id: 2, accountNumber: "223", balance: 0.12),
+			BankAccount(id: 3, accountNumber: "234543", balance: 2121232324.24),
+			BankAccount(id: 4, accountNumber: "2123", balance: 1234.24),
+			BankAccount(id: 5, accountNumber: "Мой кеш", balance: 1234.24),
+			BankAccount(id: 6, accountNumber: "фывф", balance: 1234.24),
+			BankAccount(id: 7, accountNumber: "88855", balance: 1234.24),
+		]
+		handle(bankAccounts)
+//		onDidStartRequest?()
+//		firstly {
+//			switch getAccountsBehaviour {
+//			case .getAll:
+//				return dependencies.bankAccountsService.getAccountsToTransfer()
+//			case .getOwn:
+//				return dependencies.bankAccountsService.getAccounts()
+//			}
+//		}.ensure {
+//			self.onDidFinishRequest?()
+//		}.done { bankAccounts in
+//			self.handle(bankAccounts)
+//			self.onDidLoadData?()
+//		}.catch { error in
+//			self.onDidReceiveError?(error)
+//		}
 	}
 
 	private func handle(_ bankAccounts: [BankAccount]) {

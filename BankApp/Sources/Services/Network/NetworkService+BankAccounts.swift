@@ -13,15 +13,29 @@ struct TransferQuery {
 	let amount: Double
 }
 
+struct MakeBankAccountTransferQuery {
+	let amount: Double
+	let accountDebitingId: Int64
+	let accountReplenishmentId: Int64
+}
+
 extension NetworkService: BankAccountsNetworkProtocol {
 	private enum Keys {
 		static let accountId = "accountId"
 		static let amount = "amount"
+		static let accountDebitingId = "accountDebitingId"
+		static let accountReplenishmentId = "accountReplenishmentId"
 	}
 
 	func getAccounts() -> Promise<[BankAccount]> {
 		request(method: .get,
 				url: URLFactory.BankAccounts.accounts,
+				authorized: true)
+	}
+
+	func getAccountsToTransfer() -> Promise<[BankAccount]> {
+		request(method: .get,
+				url: URLFactory.BankAccounts.accountsToTransfer,
 				authorized: true)
 	}
 
@@ -49,6 +63,18 @@ extension NetworkService: BankAccountsNetworkProtocol {
 		]
 		return request(method: .post,
 					   url: URLFactory.BankAccounts.replenish,
+					   authorized: true,
+					   parameters: parameters)
+	}
+
+	func makeTransfer(query: MakeBankAccountTransferQuery) -> Promise<BankAccount> {
+		let parameters: Parameters = [
+			Keys.accountDebitingId: query.accountDebitingId,
+			Keys.accountReplenishmentId: query.accountReplenishmentId,
+			Keys.amount: query.amount
+		]
+		return request(method: .post,
+					   url: URLFactory.BankAccounts.makeTransfer,
 					   authorized: true,
 					   parameters: parameters)
 	}

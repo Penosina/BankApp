@@ -31,7 +31,8 @@ final class BankAccountListCoordinator: Coordinator {
 	}
 
 	private func showBankAccountList(animated: Bool) {
-		let viewModel = BankAccountListViewModel(dependencies: appDependency)
+		let viewModel = BankAccountListViewModel(dependencies: appDependency,
+												 getAccountsBehaviour: .getOwn)
 		viewModel.delegate = self
 		let vc = BankAccountListViewController(viewModel: viewModel)
 		self.viewModelInput = viewModel

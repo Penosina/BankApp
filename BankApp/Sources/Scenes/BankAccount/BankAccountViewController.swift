@@ -32,6 +32,7 @@ final class BankAccountViewController: UIViewController, AlertShowing {
 	}()
 	private let withdrawButton = CommonButton()
 	private let replenishButton = CommonButton()
+	private let makeTransferButton = CommonButton()
 	private let closeAccountButton = CommonButton()
 	private lazy var operationHistoryView = OperationHistoryView(viewModel: viewModel.operationHistoryViewModel)
 
@@ -45,6 +46,11 @@ final class BankAccountViewController: UIViewController, AlertShowing {
 	@objc
 	private func replenish() {
 		viewModel.didRequestReplenish()
+	}
+
+	@objc
+	private func makeTransfer() {
+		viewModel.didRequestMakeTransfer()
 	}
 
 	@objc
@@ -76,6 +82,7 @@ final class BankAccountViewController: UIViewController, AlertShowing {
 		setupBalanceLabel()
 		setupWithdrawButton()
 		setupReplenishButton()
+		setupMakeTransferButton()
 		setupCloseAccountButton()
 		setupOperationHistoryView()
 	}
@@ -120,6 +127,12 @@ final class BankAccountViewController: UIViewController, AlertShowing {
 		contentStackView.addArrangedSubview(replenishButton)
 		replenishButton.setTitle("Пополнить", for: .normal)
 		replenishButton.addTarget(self, action: #selector(replenish), for: .touchUpInside)
+	}
+
+	private func setupMakeTransferButton() {
+		contentStackView.addArrangedSubview(makeTransferButton)
+		makeTransferButton.setTitle("Сделать перевод", for: .normal)
+		makeTransferButton.addTarget(self, action: #selector(makeTransfer), for: .touchUpInside)
 	}
 
 	private func setupCloseAccountButton() {
