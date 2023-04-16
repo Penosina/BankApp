@@ -29,41 +29,36 @@ extension NetworkService: BankAccountsNetworkProtocol {
 
 	func getAccounts() -> Promise<[BankAccount]> {
 		request(method: .get,
-				url: URLFactory.BankAccounts.accounts,
-				authorized: true)
+				url: URLFactory.BankAccounts.accounts)
 	}
 
 	func getAccountsToTransfer() -> Promise<[BankAccount]> {
 		request(method: .get,
-				url: URLFactory.BankAccounts.accountsToTransfer,
-				authorized: true)
+				url: URLFactory.BankAccounts.accountsToTransfer)
 	}
 
 	func getAccount(accountId: Int64) -> Promise<BankAccount> {
 		request(method: .get,
-				url: URLFactory.BankAccounts.account(id: accountId),
-				authorized: true)
+				url: URLFactory.BankAccounts.account(id: accountId))
 	}
 
-	func withdraw(query: TransferQuery) -> Promise<BankAccount> {
+	func withdraw(query: TransferQuery) -> Promise<EmptyResponse> {
 		let parameters: Parameters = [
 			Keys.accountId: query.accountId,
 			Keys.amount: query.amount
 		]
 		return request(method: .post,
 					   url: URLFactory.BankAccounts.withdraw,
-					   authorized: true,
 					   parameters: parameters)
 	}
 
-	func replenish(query: TransferQuery) -> Promise<BankAccount> {
+	func replenish(query: TransferQuery) -> Promise<EmptyResponse> {
 		let parameters: Parameters = [
 			Keys.accountId: query.accountId,
 			Keys.amount: query.amount
 		]
 		return request(method: .post,
 					   url: URLFactory.BankAccounts.replenish,
-					   authorized: true,
 					   parameters: parameters)
 	}
 
@@ -75,25 +70,21 @@ extension NetworkService: BankAccountsNetworkProtocol {
 		]
 		return request(method: .post,
 					   url: URLFactory.BankAccounts.makeTransfer,
-					   authorized: true,
 					   parameters: parameters)
 	}
 
 	func create() -> Promise<BankAccount> {
 		request(method: .post,
-				url: URLFactory.BankAccounts.create,
-				authorized: true)
+				url: URLFactory.BankAccounts.create)
 	}
 
 	func close(accountId: Int64) -> Promise<EmptyResponse> {
 		request(method: .delete,
-				url: URLFactory.BankAccounts.close(id: accountId),
-				authorized: true)
+				url: URLFactory.BankAccounts.close(id: accountId))
 	}
 
 	func getOperaionHistory(accountId: Int64) -> Promise<[Operation]> {
 		request(method: .get,
-				url: URLFactory.BankAccounts.operationHistory(id: accountId),
-				authorized: true)
+				url: URLFactory.BankAccounts.operationHistory(id: accountId))
 	}
 }

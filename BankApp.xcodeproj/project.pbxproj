@@ -12,6 +12,10 @@
 		CE02388229B1F366009540DA /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02388129B1F366009540DA /* ActivityIndicatorView.swift */; };
 		CE02388629B1F829009540DA /* BankAccountCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02388529B1F829009540DA /* BankAccountCellView.swift */; };
 		CE02388829B1F856009540DA /* BankAccountCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02388729B1F856009540DA /* BankAccountCellViewModel.swift */; };
+		CE3E7C5329EC67060060F5A4 /* OverduePaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E7C5229EC67060060F5A4 /* OverduePaymentViewModel.swift */; };
+		CE3E7C5529EC671A0060F5A4 /* OverduePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E7C5429EC671A0060F5A4 /* OverduePaymentViewController.swift */; };
+		CE3E7C5729EC68860060F5A4 /* OverduePaymentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E7C5629EC68860060F5A4 /* OverduePaymentCoordinator.swift */; };
+		CE3E7C5929EC69020060F5A4 /* OverduePaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E7C5829EC69020060F5A4 /* OverduePaymentView.swift */; };
 		CE51825A29CEB00200C4F52C /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51825929CEB00200C4F52C /* DeepLink.swift */; };
 		CE51825C29CEB09B00C4F52C /* DeepLinkHandlerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51825B29CEB09B00C4F52C /* DeepLinkHandlerProtocols.swift */; };
 		CE51825E29CEB0B700C4F52C /* DeepLinksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51825D29CEB0B700C4F52C /* DeepLinksService.swift */; };
@@ -125,6 +129,10 @@
 		CE02388129B1F366009540DA /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		CE02388529B1F829009540DA /* BankAccountCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountCellView.swift; sourceTree = "<group>"; };
 		CE02388729B1F856009540DA /* BankAccountCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccountCellViewModel.swift; sourceTree = "<group>"; };
+		CE3E7C5229EC67060060F5A4 /* OverduePaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverduePaymentViewModel.swift; sourceTree = "<group>"; };
+		CE3E7C5429EC671A0060F5A4 /* OverduePaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverduePaymentViewController.swift; sourceTree = "<group>"; };
+		CE3E7C5629EC68860060F5A4 /* OverduePaymentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverduePaymentCoordinator.swift; sourceTree = "<group>"; };
+		CE3E7C5829EC69020060F5A4 /* OverduePaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverduePaymentView.swift; sourceTree = "<group>"; };
 		CE51825929CEB00200C4F52C /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
 		CE51825B29CEB09B00C4F52C /* DeepLinkHandlerProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkHandlerProtocols.swift; sourceTree = "<group>"; };
 		CE51825D29CEB0B700C4F52C /* DeepLinksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinksService.swift; sourceTree = "<group>"; };
@@ -271,6 +279,17 @@
 				CE02388729B1F856009540DA /* BankAccountCellViewModel.swift */,
 			);
 			path = BankAccountCell;
+			sourceTree = "<group>";
+		};
+		CE3E7C5129EC66F30060F5A4 /* OverduePayments */ = {
+			isa = PBXGroup;
+			children = (
+				CE3E7C5229EC67060060F5A4 /* OverduePaymentViewModel.swift */,
+				CE3E7C5629EC68860060F5A4 /* OverduePaymentCoordinator.swift */,
+				CE3E7C5429EC671A0060F5A4 /* OverduePaymentViewController.swift */,
+				CE3E7C5829EC69020060F5A4 /* OverduePaymentView.swift */,
+			);
+			path = OverduePayments;
 			sourceTree = "<group>";
 		};
 		CE51825829CEAFF700C4F52C /* DeepLink */ = {
@@ -503,6 +522,7 @@
 		CEE25F2E29ABE93200810CD2 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				CE3E7C5129EC66F30060F5A4 /* OverduePayments */,
 				CECAF22729E6834400622E4B /* MakeTransfer */,
 				CE5B4FFC29B6280F004684EF /* LoanCalculator */,
 				CE5B500829B63B85004684EF /* SelectBankAccount */,
@@ -830,6 +850,8 @@
 				CE6803B729B3ABE800E917D9 /* ConfigurableCoordinator.swift in Sources */,
 				CEE25F3F29ABEE5F00810CD2 /* AuthViewModel.swift in Sources */,
 				CE5B4FFE29B6281D004684EF /* LoanCalculatorCoordinator.swift in Sources */,
+				CE3E7C5729EC68860060F5A4 /* OverduePaymentCoordinator.swift in Sources */,
+				CE3E7C5929EC69020060F5A4 /* OverduePaymentView.swift in Sources */,
 				CE6803AD29B1FF8000E917D9 /* OperationHistory.swift in Sources */,
 				CEE25F3D29ABEE5400810CD2 /* AuthViewController.swift in Sources */,
 				CEE25F7029AE09C700810CD2 /* ImageAsset.swift in Sources */,
@@ -879,6 +901,7 @@
 				CEE25EFD29ABD93800810CD2 /* SceneDelegate.swift in Sources */,
 				CE5B500A29B63BCF004684EF /* SelectBankAccountCoordinator.swift in Sources */,
 				CEE25F7929AE2AF900810CD2 /* FeedCoordinator.swift in Sources */,
+				CE3E7C5329EC67060060F5A4 /* OverduePaymentViewModel.swift in Sources */,
 				CECAF22B29E683E700622E4B /* MakeTransferViewModel.swift in Sources */,
 				CE5B4FF429B61631004684EF /* TwoLabel.swift in Sources */,
 				CE5B4FE929B50911004684EF /* AlertShowing.swift in Sources */,
@@ -890,6 +913,7 @@
 				CE6803A129B1FA0F00E917D9 /* BankAccount.swift in Sources */,
 				CE5B4FE729B4F908004684EF /* LoanCellViewModel.swift in Sources */,
 				CE5B500029B62896004684EF /* LoanCalculatorViewModel.swift in Sources */,
+				CE3E7C5529EC671A0060F5A4 /* OverduePaymentViewController.swift in Sources */,
 				CE6803CF29B4E14900E917D9 /* ImageIconView.swift in Sources */,
 				CEE25F3429ABE9E500810CD2 /* WelcomeCoordinator.swift in Sources */,
 				CEE25F9629AFCAF800810CD2 /* BankAccountCoordinator.swift in Sources */,

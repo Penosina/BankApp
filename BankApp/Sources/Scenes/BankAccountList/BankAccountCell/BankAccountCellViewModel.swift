@@ -19,7 +19,7 @@ final class BankAccountCellViewModel {
 	}
 
 	var accountName: String {
-		bankAccount.accountNumber
+		"Идентификатор счета: \(bankAccount.id)"
 	}
 
 	private let bankAccount: BankAccount

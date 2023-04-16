@@ -18,8 +18,8 @@ protocol BankAccountsNetworkProtocol {
 	func getAccounts() -> Promise<[BankAccount]>
 	func getAccountsToTransfer() -> Promise<[BankAccount]>
 	func getAccount(accountId: Int64) -> Promise<BankAccount>
-	func withdraw(query: TransferQuery) -> Promise<BankAccount>
-	func replenish(query: TransferQuery) -> Promise<BankAccount>
+	func withdraw(query: TransferQuery) -> Promise<EmptyResponse>
+	func replenish(query: TransferQuery) -> Promise<EmptyResponse>
 	func makeTransfer(query: MakeBankAccountTransferQuery) -> Promise<BankAccount>
 	func create() -> Promise<BankAccount>
 	func close(accountId: Int64) -> Promise<EmptyResponse>

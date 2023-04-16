@@ -43,45 +43,45 @@ final class OperationHistoryViewModel {
 	}
 
 	private func loadOperationHistory() {
-		let operations = [
-			Operation(value: "123",
-					  executeDate: "Сегодня",
-					  type: .in,
-					  inAccountNumber: bankAccount.accountNumber,
-					  outAccountNumber: "XXX"),
-			Operation(value: "234",
-					  executeDate: "Сегодня",
-					  type: .out,
-					  inAccountNumber: "ZZZ",
-					  outAccountNumber: bankAccount.accountNumber),
-			Operation(value: "456",
-					  executeDate: "Сегодня",
-					  type: .in,
-					  inAccountNumber: bankAccount.accountNumber,
-					  outAccountNumber: "OOO"),
-			Operation(value: "567",
-					  executeDate: "Сегодня",
-					  type: .out,
-					  inAccountNumber: "ZZZ",
-					  outAccountNumber: bankAccount.accountNumber),
-			Operation(value: "678",
-					  executeDate: "Сегодня",
-					  type: .in,
-					  inAccountNumber: bankAccount.accountNumber,
-					  outAccountNumber: "QWERTY"),
-		]
-		handle(operations: operations)
+//		let operations = [
+//			Operation(value: "123",
+//					  executeDate: "Сегодня",
+//					  type: .in,
+//					  inAccountNumber: bankAccount.accountNumber,
+//					  outAccountNumber: "XXX"),
+//			Operation(value: "234",
+//					  executeDate: "Сегодня",
+//					  type: .out,
+//					  inAccountNumber: "ZZZ",
+//					  outAccountNumber: bankAccount.accountNumber),
+//			Operation(value: "456",
+//					  executeDate: "Сегодня",
+//					  type: .in,
+//					  inAccountNumber: bankAccount.accountNumber,
+//					  outAccountNumber: "OOO"),
+//			Operation(value: "567",
+//					  executeDate: "Сегодня",
+//					  type: .out,
+//					  inAccountNumber: "ZZZ",
+//					  outAccountNumber: bankAccount.accountNumber),
+//			Operation(value: "678",
+//					  executeDate: "Сегодня",
+//					  type: .in,
+//					  inAccountNumber: bankAccount.accountNumber,
+//					  outAccountNumber: "QWERTY"),
+//		]
+//		handle(operations: operations)
 
-//		onDidStartRequest?()
-//		firstly {
-//			dependencies.bankAccountsService.getOperaionHistory(accountId: bankAccount.id)
-//		}.ensure {
-//			self.onDidFinishRequest?()
-//		}.done { operations in
-//			self.handle(operations: operations)
-//		}.catch { error in
-//			self.onDidReceiveError?(error)
-//		}
+		onDidStartRequest?()
+		firstly {
+			dependencies.bankAccountsService.getOperaionHistory(accountId: bankAccount.id)
+		}.ensure {
+			self.onDidFinishRequest?()
+		}.done { operations in
+			self.handle(operations: operations)
+		}.catch { error in
+			self.onDidReceiveError?(error)
+		}
 	}
 
 	private func handle(operations: [Operation]) {

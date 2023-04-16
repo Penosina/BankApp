@@ -50,6 +50,7 @@ final class MakeTransferCoordinator: ConfigurableCoordinator {
 extension MakeTransferCoordinator: MakeTransferViewModelDelegate {
 	func makeTransferViewModel(didUpdateBankAccount bankAccount: BankAccount,
 							   andCreateNewOperation operation: Operation) {
+		navigationController.popViewController(animated: true)
 		delegate?.makeTransferCoordinator(didUpdateBankAccount: bankAccount,
 										  andCreateNewOperation: operation)
 	}

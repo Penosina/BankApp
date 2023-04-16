@@ -59,27 +59,33 @@ final class CalculatorViewModel {
 
 		let query = TransferQuery(accountId: bankAccount.id, amount: amount)
 		let operaion: Operation?
-		let promise: Promise<BankAccount>?
+		let promise: Promise<EmptyResponse>?
 		switch action {
 		case .withdraw:
-			operaion = Operation(value: "\(amount)",
-								 executeDate: "Now",
-								 type: .out,
-								 inAccountNumber: bankAccount.accountNumber,
-								 outAccountNumber: "XXX")
-			promise = dependencies.bankAccountsService.withdraw(query: query)
-		case .replenish:
+			bankAccount = BankAccount(id: bankAccount.id,
+									  accountNumber: bankAccount.accountNumber,
+									  balance: bankAccount.balance - amount)
 			operaion = Operation(value: "\(amount)",
 								 executeDate: "Now",
 								 type: .in,
-								 inAccountNumber: "ZZZ",
-								 outAccountNumber: bankAccount.accountNumber)
+								 accountReplenishmentId: bankAccount.id,
+								 accountDebitingId: nil)
+			promise = dependencies.bankAccountsService.withdraw(query: query)
+		case .replenish:
+			bankAccount = BankAccount(id: bankAccount.id,
+									  accountNumber: bankAccount.accountNumber,
+									  balance: bankAccount.balance + amount)
+			operaion = Operation(value: "\(amount)",
+								 executeDate: "Сейчас",
+								 type: .out,
+								 accountReplenishmentId: nil,
+								 accountDebitingId: bankAccount.id)
 			promise = dependencies.bankAccountsService.replenish(query: query)
 		case .makeTransfer:
 			promise = nil
 			operaion = nil
 		}
-		process(promise, with: operaion)
+		process(promise, with: bankAccount, and: operaion)
 
 //		let newBalance: Double
 //		switch action {
@@ -94,7 +100,7 @@ final class CalculatorViewModel {
 //		onDidFinishRequest?()
 	}
 
-	private func process(_ promise: Promise<BankAccount>?, with operation: Operation?) {
+	private func process(_ promise: Promise<EmptyResponse>?, with bankAccount: BankAccount, and operation: Operation?) {
 		guard let promise, let operation else { fatalError("Случилось что-то плохое((") }
 
 		onDidStartRequest?()
@@ -103,7 +109,7 @@ final class CalculatorViewModel {
 			promise
 		}.ensure {
 			self.onDidFinishRequest?()
-		}.done { bankAccount in
+		}.done { _ in
 			self.handle(bankAccount: bankAccount, operation: operation)
 		}.catch { error in
 			self.onDidReceiveError?(error)

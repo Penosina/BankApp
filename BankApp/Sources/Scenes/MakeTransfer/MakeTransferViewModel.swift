@@ -67,9 +67,9 @@ final class MakeTransferViewModel {
 
 		let operaion = Operation(value: "\(amount)",
 								 executeDate: "Сейчас",
-								 type: .in,
-								 inAccountNumber: bankAccount.accountNumber,
-								 outAccountNumber: replenishAccount.accountNumber)
+								 type: .transfer,
+								 accountReplenishmentId: replenishAccount.id,
+								 accountDebitingId: bankAccount.id)
 		let query = MakeBankAccountTransferQuery(amount: amount,
 												 accountDebitingId: bankAccount.id,
 												 accountReplenishmentId: replenishAccount.id)

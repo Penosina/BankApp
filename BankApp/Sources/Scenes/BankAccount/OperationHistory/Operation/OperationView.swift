@@ -67,7 +67,7 @@ final class OperationView: UIView {
 	private func setupInAccountNumberLabel() {
 		if let inAccountNumber = viewModel.inAccountNumber {
 			stackView.addArrangedSubview(inAccountNumberLabel)
-			inAccountNumberLabel.text = "Счет отправителя: №\(inAccountNumber)"
+			inAccountNumberLabel.text = "Счет получателя: №\(inAccountNumber)"
 			inAccountNumberLabel.font = .body
 			inAccountNumberLabel.textColor = .white
 		}
@@ -76,7 +76,7 @@ final class OperationView: UIView {
 	private func setupOutAccountNumberLabel() {
 		if let outAccountNumber = viewModel.outAccountNumber {
 			stackView.addArrangedSubview(outAccountNumberLabel)
-			outAccountNumberLabel.text = "Счет получателя: №\(outAccountNumber)"
+			outAccountNumberLabel.text = "Счет отправителя: №\(outAccountNumber)"
 			outAccountNumberLabel.font = .body
 			outAccountNumberLabel.textColor = .white
 		}

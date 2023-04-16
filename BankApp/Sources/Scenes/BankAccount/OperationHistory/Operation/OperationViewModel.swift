@@ -14,6 +14,8 @@ final class OperationViewModel {
 			return .transferIn
 		case .out:
 			return .transferOut
+		case .transfer:
+			return .transfer
 		}
 	}
 
@@ -23,31 +25,30 @@ final class OperationViewModel {
 			return .accentPurple
 		case .out:
 			return .outTransfer
+		case .transfer:
+			return .magenta
 		}
 	}
 
 	var text: String {
-		switch operation.type {
-		case .in:
-			return "+\(operation.value) ₽"
-		case .out:
-			return "-\(operation.value) ₽"
-		}
+		"\(operation.value) ₽"
 	}
 
 	var inAccountNumber: String? {
-		operation.inAccountNumber
+		if let accountReplenishmentId = operation.accountReplenishmentId {
+			return "\(accountReplenishmentId)"
+		}
+		return nil
 	}
 
 	var outAccountNumber: String? {
-		operation.outAccountNumber
+		if let accountDebitingId = operation.accountDebitingId {
+			return "\(accountDebitingId)"
+		}
+		return nil
 	}
 
 	var date: String {
-//		let dateFormatter = DateFormatter()
-//		dateFormatter.dateFormat = "dd MMM yyyy, HH:mm"
-//		dateFormatter.timeZone = .current
-//		return dateFormatter.string(from: operation.executeDate)
 		operation.executeDate
 	}
 

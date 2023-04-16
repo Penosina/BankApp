@@ -25,7 +25,7 @@ final class BankAccountViewModel {
 	var onDidFinishRequest: (() -> Void)?
 
 	lazy var screenTitle: String = {
-		"Счёт №\(bankAccount.accountNumber)"
+		"Счёт \(bankAccount.id)"
 	}()
 	var balance: String {
 		"\(bankAccount.balance) ₽"

@@ -11,10 +11,10 @@ struct Operation: Decodable {
 	let value: String
 	let executeDate: String
 	let type: OperationType
-	let inAccountNumber: String?
-	let outAccountNumber: String?
+	let accountReplenishmentId: Int64?
+	let accountDebitingId: Int64?
 }
 
 enum OperationType: String, Decodable {
-	case `in` = "ACCOUNT_REPLENISHMENT", out = "WITHDRAWAL_OF_FUNDS_FROM_ACCOUNT"
+	case `in` = "ACCOUNT_REPLENISHMENT", out = "WITHDRAWAL_OF_FUNDS_FROM_ACCOUNT", transfer = "TRANSFER"
 }

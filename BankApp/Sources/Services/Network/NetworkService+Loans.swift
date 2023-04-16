@@ -23,8 +23,7 @@ extension NetworkService: LoansNetworkProtocol {
 
 	func getLoans() -> Promise<[Loan]> {
 		request(method: .get,
-				url: URLFactory.Loans.loans,
-				authorized: true)
+				url: URLFactory.Loans.loans)
 	}
 
 	func repay(query: RepayLoanQuery) -> Promise<RepaymentModel> {
@@ -35,7 +34,6 @@ extension NetworkService: LoansNetworkProtocol {
 		]
 		return request(method: .post,
 					   url: URLFactory.Loans.repay,
-					   authorized: true,
 					   parameters: parameters)
 	}
 
@@ -50,7 +48,6 @@ extension NetworkService: LoansNetworkProtocol {
 		]
 		return request(method: .post,
 					   url: URLFactory.Loans.create,
-					   authorized: true,
 					   parameters: parameters)
 	}
 }

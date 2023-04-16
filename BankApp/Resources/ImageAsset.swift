@@ -18,6 +18,7 @@ enum ImageAsset: String {
 	case loan
 	case transferIn = "in"
 	case transferOut = "out"
+	case transfer
 }
 
 extension UIImage {
