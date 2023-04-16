@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class LoanCalculatorViewController: UIViewController, NavigationBarHiding, ActivityIndicatorViewDisplaying {
+final class LoanCalculatorViewController: UIViewController, NavigationBarHiding, ActivityIndicatorViewDisplaying, AlertShowing {
 	let activityIndicatorView = ActivityIndicatorView()
 
 	private let scrollView = UIScrollView()
@@ -93,6 +93,10 @@ final class LoanCalculatorViewController: UIViewController, NavigationBarHiding,
 
 		viewModel.onDidFinishRequest = { [weak self] in
 			self?.activityIndicatorView.stopAnimating()
+		}
+
+		viewModel.onDidReceiveError = { [weak self] _ in
+			self?.showAlert(title: "Операция не может быть выполнена!")
 		}
 	}
 

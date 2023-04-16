@@ -149,6 +149,10 @@ final class BankAccountViewController: UIViewController, AlertShowing {
 		viewModel.onDidLoadData = { [weak self] in
 			self?.balanceLabel.text = self?.viewModel.balance
 		}
+
+		viewModel.onDidReceiveError = { [weak self] _ in
+			self?.showAlert(title: "Операция не может быть выполнена!")
+		}
 	}
 
 	required init?(coder: NSCoder) {

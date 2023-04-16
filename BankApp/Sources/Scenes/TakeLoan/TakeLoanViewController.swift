@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TakeLoanViewController: UIViewController, ActivityIndicatorViewDisplaying {
+final class TakeLoanViewController: UIViewController, ActivityIndicatorViewDisplaying, AlertShowing {
 	let activityIndicatorView = ActivityIndicatorView()
 
 	private let scrollView = UIScrollView()
@@ -140,6 +140,10 @@ final class TakeLoanViewController: UIViewController, ActivityIndicatorViewDispl
 		viewModel.onDidUpdateWithdrawalAccount = { [weak self] in
 			self?.selectWithdrawalAccountButton.setTitle(self?.viewModel.withdrawalAccountButtonTitle,
 														 for: .normal)
+		}
+
+		viewModel.onDidReceiveError = { [weak self] _ in
+			self?.showAlert(title: "Операция не может быть выполнена!")
 		}
 	}
 

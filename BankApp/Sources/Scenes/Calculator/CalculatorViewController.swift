@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CalculatorViewController: UIViewController, NavigationBarHiding, ActivityIndicatorViewDisplaying {
+final class CalculatorViewController: UIViewController, NavigationBarHiding, ActivityIndicatorViewDisplaying, AlertShowing {
 	let activityIndicatorView = ActivityIndicatorView()
 
 	private let scrollView = UIScrollView()
@@ -87,6 +87,7 @@ final class CalculatorViewController: UIViewController, NavigationBarHiding, Act
 		setupBalanceLabel()
 		setupTextField()
 		setupSubmitButton()
+		setupActivityIndicatorView()
 	}
 
 	private func setupScrollView() {
@@ -150,6 +151,10 @@ final class CalculatorViewController: UIViewController, NavigationBarHiding, Act
 
 		viewModel.onDidLoadData = { [weak self] in
 			self?.balanceLabel.text = self?.viewModel.balanceTitle
+		}
+
+		viewModel.onDidReceiveError = { [weak self] _ in
+			self?.showAlert(title: "Операция не может быть выполнена!")
 		}
 	}
 

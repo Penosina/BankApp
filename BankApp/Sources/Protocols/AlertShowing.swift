@@ -16,7 +16,7 @@ extension AlertShowing where Self: UIViewController {
 		let alertController = UIAlertController(title: title,
 												message: description,
 												preferredStyle: .alert)
-		if let action = action {
+		if let action {
 			let cancelAction = UIAlertAction(title: "Отменить", style: .cancel)
 			let okAction = UIAlertAction(title: "Закрыть", style: .destructive) { _ in
 				action()
